@@ -14,7 +14,10 @@ const resJSON = (response, statusCode, object) => {
     response.end(JSON.stringify(object));
 }
 
-
+const resTEXT = (response, statusCode, message) => {
+    response.writeHead(statusCode, { 'Content-Type': 'text/plain' });
+    response.end(message);
+}
 
 let countries = [];
 try {
