@@ -59,7 +59,16 @@ const server = http.createServer((request, response) => {
         }
 
         else if (method === 'GET' || method === 'HEAD') {
+            let results = countries.slice();
+            if (searchParams.has('name')) {
 
+            }
+            if (searchParams.has('reigon')) {
+
+            }
+            if (searchParams.has('limit')) {
+
+            }
         }
 
         else if (method === 'POST') {
