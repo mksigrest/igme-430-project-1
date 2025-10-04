@@ -40,13 +40,17 @@ const server = http.createServer((request, response) => {
             response.writeHead(200, { 'Content-Type': 'text/html' });
 
             if (method === 'GET') {
-                response.end()
+                response.end(data);
             }
 
-            else if ((method === 'GET' || method === 'HEAD') && (pathName = '/client.css')) {
-
+            else if (method === 'HEAD') {
+                response.end();
             }
         });    
+    }
+
+    else if ((method === 'GET' || method === 'HEAD') && (pathName = '/client.css')) {
+
     }
 });
 
