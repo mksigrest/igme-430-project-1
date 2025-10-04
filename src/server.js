@@ -14,11 +14,6 @@ const resJSON = (response, statusCode, object) => {
     response.end(JSON.stringify(object));
 }
 
-const resTEXT = (response, statusCode, message) => {
-    response.writeHead(statusCode, { 'Content-Type': 'text/plain' });
-    response.end(message);
-}
-
 let countries = [];
 try {
     const rawJSON = fs.readFileSync(json, { encoding: 'utf8' });
@@ -37,10 +32,9 @@ const server = http.createServer((request, response) => {
 
     if ((method === 'GET' || method === 'HEAD') && (pathName === '/' || pathname === '/client.html')) {
         response.writeHead(200, { 'Content-Type': 'text/html' });
-        let readHTML = fs.readFileSync(html);
 
         if (method === 'GET') {
-            response.end(readHTML);
+            response.end(fs.readFileSync(html));
         }
         else if (method === 'HEAD') {
             response.end();
@@ -49,14 +43,17 @@ const server = http.createServer((request, response) => {
 
     else if ((method === 'GET' || method === 'HEAD') && (pathName = '/client.css')) {
         response.writeHead(200, { 'Content-Type': 'text/css' });
-        let readCSS = fs.readFileSync(css);
 
         if (method === 'GET') {
-            response.end(readCSS);
+            response.end(fs.readFileSync(style));
         }
         else if (method === 'HEAD') {
             response.end();
         }
+    }
+
+    else {
+        resJSON(response, 404, { message: 'The page you are looking for was not found.', id: 'notFound' });
     }
 });
 
