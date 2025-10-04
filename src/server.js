@@ -9,6 +9,10 @@ const json = path.join(__dirname, '..', 'jsonFile', 'countries.json');
 
 const PORT = process.env.PORT || process.env.NODE_PORT || 3000;
 
+const resJSON = (response, status, rawBody, pBody, pMessage) {
+    const body = JSON.stringify(rawBody);
+}
+
 let countries = [];
 try {
     const rawJSON = fs.readFileSync(json, { encoding: 'utf8' });
@@ -17,10 +21,8 @@ try {
         console.error('Parsed data isnt array');
     }
 }
-
 catch (error) {
     console.error(`Failed to load country data from ${json}:`, error.message);
-
 }
 
 
