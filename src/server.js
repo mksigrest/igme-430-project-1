@@ -36,13 +36,18 @@ const server = http.createServer((request, response) => {
     const pathName = parsedUrl.pathname;
 
     if ((method === 'GET' || method === 'HEAD') && (pathName = '/' || pathname = '/client.html')) {
+        response.writeHead(200, { 'Content-Type': 'text/html' });
+        fs.readFile(html, (error, data) => {
+            if (method === 'GET') {
+                response.end()
+            }
 
-    }
+            else if ((method === 'GET' || method === 'HEAD') && (pathName = '/client.css')) {
 
-    else if ((method === 'GET' || method === 'HEAD') && (pathName = '/client.css')) {
-
-    }
-})
+            }
+        });    
+    });
+});
 
 server.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}/`);
