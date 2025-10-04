@@ -9,9 +9,12 @@ const json = path.join(__dirname, '..', 'jsonFile', 'countries.json');
 
 const PORT = process.env.PORT || process.env.NODE_PORT || 3000;
 
-const resJSON = (response, status, rawBody, pBody, pMessage) {
-    const body = JSON.stringify(rawBody);
+const resJSON = (response, statusCode, object) => {
+    response.writeHead(statusCode, { 'Content-Type': 'application/json' });
+    response.end(JSON.stringify(object));
 }
+
+
 
 let countries = [];
 try {
