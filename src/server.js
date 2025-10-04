@@ -32,6 +32,9 @@ catch (error) {
 }
 
 const server = http.createServer((request, response) => {
+    const parsedUrl = url.parse(request.url, true);
+    const pathName = parsedUrl.pathname;
+
 
 })
 
