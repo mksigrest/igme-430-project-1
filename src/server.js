@@ -13,10 +13,13 @@ let countries = [];
 try {
     const rawJSON = fs.readFileSync(json, { encoding: 'utf8' });
     countries = JSON.parse(rawJSON);
-    
+    if (!Array.isArray(countries)) {
+        console.error('Parsed data isnt array');
+    }
 }
 
-catch {
+catch (error) {
+    console.error(`Failed to load country data from ${json}:`, error.message);
 
 }
 
