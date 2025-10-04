@@ -42,7 +42,6 @@ const server = http.createServer((request, response) => {
             if (method === 'GET') {
                 response.end(data);
             }
-
             else if (method === 'HEAD') {
                 response.end();
             }
@@ -50,7 +49,16 @@ const server = http.createServer((request, response) => {
     }
 
     else if ((method === 'GET' || method === 'HEAD') && (pathName = '/client.css')) {
+        fs.readFile(style, (data) => {
+            response.writeHead(200, { 'Content-Type': 'text/css' });
 
+            if (method === 'GET') {
+                response.end(data);
+            }
+            else if (method === 'HEAD') {
+                response.end();
+            }
+        })
     }
 });
 
