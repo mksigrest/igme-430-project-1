@@ -41,7 +41,7 @@ const server = http.createServer((request, response) => {
         }
     }
 
-    else if ((method === 'GET' || method === 'HEAD') && (pathName = '/client.css')) {
+    else if ((method === 'GET' || method === 'HEAD') && (pathName === '/client.css')) {
         response.writeHead(200, { 'Content-Type': 'text/css' });
 
         if (method === 'GET') {
@@ -49,6 +49,16 @@ const server = http.createServer((request, response) => {
         }
         else if (method === 'HEAD') {
             response.end();
+        }
+    }
+
+    else if (pathName === '/api/countries') {
+        if (method === 'GET' || method === 'HEAD') {
+
+        }
+
+        else if (method === 'POST') {
+
         }
     }
 
