@@ -53,7 +53,12 @@ const server = http.createServer((request, response) => {
     }
 
     else if (pathName === '/api/countries') {
-        if (method === 'GET' || method === 'HEAD') {
+        if (!clientAcceptsJson(request)) {
+            resJSON(response, 406, { message: 'The request sent is not acceptable', id: 'notAcceptable' });
+            return;
+        }
+
+        else if (method === 'GET' || method === 'HEAD') {
 
         }
 
