@@ -36,29 +36,27 @@ const server = http.createServer((request, response) => {
     const pathName = parsedUrl.pathname;
 
     if ((method === 'GET' || method === 'HEAD') && (pathName === '/' || pathname === '/client.html')) {
-        fs.readFile(html, (data) => {
-            response.writeHead(200, { 'Content-Type': 'text/html' });
+        response.writeHead(200, { 'Content-Type': 'text/html' });
+        let readHTML = fs.readFileSync(html);
 
-            if (method === 'GET') {
-                response.end(data);
-            }
-            else if (method === 'HEAD') {
-                response.end();
-            }
-        });    
+        if (method === 'GET') {
+            response.end(readHTML);
+        }
+        else if (method === 'HEAD') {
+            response.end();
+        }
     }
 
     else if ((method === 'GET' || method === 'HEAD') && (pathName = '/client.css')) {
-        fs.readFile(style, (data) => {
-            response.writeHead(200, { 'Content-Type': 'text/css' });
+        response.writeHead(200, { 'Content-Type': 'text/css' });
+        let readCSS = fs.readFileSync(css);
 
-            if (method === 'GET') {
-                response.end(data);
-            }
-            else if (method === 'HEAD') {
-                response.end();
-            }
-        })
+        if (method === 'GET') {
+            response.end(readCSS);
+        }
+        else if (method === 'HEAD') {
+            response.end();
+        }
     }
 });
 
