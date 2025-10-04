@@ -9,6 +9,16 @@ const json = path.join(__dirname, '..', 'jsonFile', 'countries.json');
 
 const PORT = process.env.PORT || process.env.NODE_PORT || 3000;
 
+let countries = [];
+try {
+    const rawJSON = fs.readFileSync(json, { encoding: 'utf8' });
+    countries = JSON.parse(rawJSON);
+    
+}
+
+catch {
+
+}
 
 
 server.listen(PORT, () => {
