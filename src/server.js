@@ -35,9 +35,10 @@ const server = http.createServer((request, response) => {
     const parsedUrl = url.parse(request.url, true);
     const pathName = parsedUrl.pathname;
 
-    if ((method === 'GET' || method === 'HEAD') && (pathName = '/' || pathname = '/client.html')) {
-        response.writeHead(200, { 'Content-Type': 'text/html' });
-        fs.readFile(html, (error, data) => {
+    if ((method === 'GET' || method === 'HEAD') && (pathName === '/' || pathname === '/client.html')) {
+        fs.readFile(html, (data) => {
+            response.writeHead(200, { 'Content-Type': 'text/html' });
+
             if (method === 'GET') {
                 response.end()
             }
@@ -46,7 +47,7 @@ const server = http.createServer((request, response) => {
 
             }
         });    
-    });
+    }
 });
 
 server.listen(PORT, () => {
