@@ -31,6 +31,9 @@ catch (error) {
     console.error(`Failed to load country data from ${json}:`, error.message);
 }
 
+const server = http.createServer((request, response) => {
+
+})
 
 server.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}/`);
