@@ -35,7 +35,13 @@ const server = http.createServer((request, response) => {
     const parsedUrl = url.parse(request.url, true);
     const pathName = parsedUrl.pathname;
 
+    if ((method === 'GET' || method === 'HEAD') && (pathName = '/' || pathname = '/client.html')) {
 
+    }
+
+    else if ((method === 'GET' || method === 'HEAD') && (pathName = '/client.css')) {
+
+    }
 })
 
 server.listen(PORT, () => {
