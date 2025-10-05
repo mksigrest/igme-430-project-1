@@ -60,13 +60,14 @@ const server = http.createServer((request, response) => {
             const resultsF = countries.filter((c) => {
                 let retFilt;
                 if (region) {
-                    retFilt = c.region;
+                    retFilt = retFilt && c.region && c.region.toLowerCase().includes(region.toLowerCase().trim());
                 }
                 if (capital) {
                     retFilt = retFilt && c.capital;
                 }
-                resJSON(response, 200, retFilt);
+                return retFilt
             });
+            resJSON(response, 200, resultsF);
         }
         else if (pathName === '/api/getCountryLocation') {
 
