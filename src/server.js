@@ -58,7 +58,7 @@ const server = http.createServer((request, response) => {
         if (pathName === '/api/getCountryName') {
             const { region, capital } = parsedUrl.query;
             const resultsF = countries.filter((c) => {
-                let retFilt;
+                let retFilt = true;
                 if (region) {
                     retFilt = retFilt && c.region && c.region.toLowerCase().includes(region.toLowerCase().trim());
                 }

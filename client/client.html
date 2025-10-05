@@ -108,8 +108,13 @@
         const nameOutput = document.getElementById('nameOutput');
 
         if (method !== 'HEAD') {
-            if (response.ok) {
+            if (response.retFil) {
                 const data = await response.json();
+
+                const list = data.map(c => {
+                    const displayName = c.name || c.country || 'Unknown';
+                    const displayCap = 
+                })
                 nameOutput.innerHTML = `<strong>Success</strong> <br> <br> ${JSON.stringify(data)}`;
                 console.log(data);
             }
