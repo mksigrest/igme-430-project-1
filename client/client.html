@@ -99,6 +99,15 @@
     </div>
 </body>
 <script>
+    document.getElementById('nameSubmit').addEventListener('click', async (e) => {
+        e.preventDefault();
+
+        const url = '/api/getCountryName';
+        const method = document.getElementById('nameMethodSelect').value.toUpperCase();
+        const response = await fetch(url, { method });
+        const allOutput = document.getElementById('nameOutput');
+    })
+
     document.getElementById('allSubmit').addEventListener('click', async (e) => {
         e.preventDefault();
 
