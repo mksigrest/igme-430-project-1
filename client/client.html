@@ -103,6 +103,28 @@
 <script>
     document.getElementById('allSubmit').addEventListener('submit', async (e) => {
         e.preventDefault();
+
+        const url = document.getElementById('urlField').value;
+        const method = document.getElementById('methodSelect').value.toUpperCase();
+        const response = await fetch(url, { method });
+        const allOutput = document.getElementById('allOutput');
+
+        if (method !== 'HEAD') {
+            if (response.ok) {
+
+            }
+            else {
+
+            }
+        }
+        else {
+            if (response.ok) {
+                allOutput.innerHTML = `<strong>Success</strong>`
+            }
+            else {
+                allOutput.innerHTML = `<strong>Not Found</strong>`
+            }
+        }
     })
 </script>
 </html>
