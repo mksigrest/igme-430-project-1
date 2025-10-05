@@ -105,7 +105,28 @@
         const url = '/api/getCountryName';
         const method = document.getElementById('nameMethodSelect').value.toUpperCase();
         const response = await fetch(url, { method });
-        const allOutput = document.getElementById('nameOutput');
+        const nameOutput = document.getElementById('nameOutput');
+
+        if (method !== 'HEAD') {
+            if (response.ok) {
+                const data = await response.json();
+                nameOutput.innerHTML = `<strong>Success</strong> <br> <br> ${JSON.stringify(data)}`;
+                console.log(data);
+            }
+            else {
+                const error = await response.json();
+                nameOutput.innerHTML = `<strong>Not Found</strong> <br> <br> Message: ${error.message}`;
+                console.log(error);
+            }
+        }
+        else {
+            if (response.ok) {
+                nameOutput.innerHTML = `<strong>Success</strong>`
+            }
+            else {
+                nameOutput.innerHTML = `<strong>Not Found</strong>`
+            }
+        }
     })
 
     document.getElementById('allSubmit').addEventListener('click', async (e) => {
@@ -115,8 +136,6 @@
         const method = document.getElementById('allMethodSelect').value.toUpperCase();
         const response = await fetch(url, { method });
         const allOutput = document.getElementById('allOutput');
-
-        console.log('Pressed');
 
         if (method !== 'HEAD') {
             if (response.ok) {
