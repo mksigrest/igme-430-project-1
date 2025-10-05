@@ -63,9 +63,8 @@ const server = http.createServer((request, response) => {
                 if (capital) {
                     retFilt = retFilt && c.capital;
                 }
-                return retFilt;
+                resJSON(response, 200, retFilt);
             });
-            resJSON(response, 200, response);
         }
         else if (pathName === '/api/getCountryLocation') {
 
