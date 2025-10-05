@@ -213,7 +213,7 @@
                     const displayCurSym = (c.currency_symbol);
                     return `<li><strong>${displayName}</strong> - Currency Name:${displayCurName} - Currency Symbol:${displayCurSym}</li>`;
                 }).join('');
-                locationOutput.innerHTML = `<strong>Found ${data.length}</strong><ul>${list}</ul>`;
+                financeOutput.innerHTML = `<strong>Found ${data.length}</strong><ul>${list}</ul>`;
                 console.log(data);
             }
             else {
