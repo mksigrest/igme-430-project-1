@@ -102,6 +102,14 @@
     document.getElementById('nameSubmit').addEventListener('click', async (e) => {
         e.preventDefault();
 
+        const endpoint = document.getElementById('nameSubmit').closest('.endpoint');
+        const region = endpoint.querySelector('.regionField').value.trim();
+        const capital = endpoint.querySelector('.capitalField').value.trim();
+
+        const params = new URLSearchParams();
+        if (region) params.append('region', region);
+        if (capital) params.append('capital', capital);
+
         const url = '/api/getCountryName' + (params.toString() ? `?${params.toString()}` : '');
         const method = document.getElementById('nameMethodSelect').value.toUpperCase();
         const response = await fetch(url, { method });
@@ -130,6 +138,49 @@
             }
             else {
                 nameOutput.innerHTML = `<strong>Not Found</strong>`
+            }
+        }
+    })
+
+    document.getElementById('locationSubmit').addEventListener('click', async (e) => {
+        e.preventDefault();
+
+        const endpoint = document.getElementById('nameSubmit').closest('.endpoint');
+        const name = endpoint.querySelector('.nameField').value.trim();
+        const capital = endpoint.querySelector('.capitalField').value.trim();
+
+        const params = new URLSearchParams();
+        if (name) params.append('name', name);
+        if (capital) params.append('capital', capital);
+
+        const url = '/api/getCountryLocation' + (params.toString() ? `?${params.toString()}` : '');
+        const method = document.getElementById('locationMethodSelect').value.toUpperCase();
+        const response = await fetch(url, { method });
+        const locationOutput = document.getElementById('locationOutput');
+
+        if (method !== 'HEAD') {
+            if (response.ok) {
+                const data = await response.json();
+
+                const list = data.map(c => {
+                    const displayName = (c.name && (c.name.common || c.name))
+                    return `<li><strong>${displayName}</strong></li>`;
+                }).join('');
+                locationOutput.innerHTML = `<strong>Found ${data.length}</strong><ul>${list}</ul>`;
+                console.log(data);
+            }
+            else {
+                const error = await response.json();
+                locationOutput.innerHTML = `<strong>Not Found</strong> <br> <br> Message: ${error.message}`;
+                console.log(error);
+            }
+        }
+        else {
+            if (response.ok) {
+                locationOutput.innerHTML = `<strong>Success</strong>`
+            }
+            else {
+                locationOutput.innerHTML = `<strong>Not Found</strong>`
             }
         }
     })

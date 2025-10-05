@@ -63,7 +63,7 @@ const server = http.createServer((request, response) => {
                     retFilt = retFilt && c.region && c.region.toLowerCase().includes(region.toLowerCase().trim());
                 }
                 if (capital) {
-                    retFilt = retFilt && c.capital;
+                    retFilt = retFilt && c.capital && c.capital.toLowerCase().includes(capital.toLowerCase().trim());
                 }
                 return retFilt
             });
