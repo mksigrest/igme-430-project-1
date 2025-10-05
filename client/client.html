@@ -163,8 +163,8 @@
                 const data = await response.json();
 
                 const list = data.map(c => {
-                    const displayName = (c.name && (c.name.common || c.name))
-                    return `<li><strong>${displayName}</strong></li>`;
+                    const displayLocation = (c.name && (c.name.common || c.name))
+                    return `<li><strong>${displayLocation}</strong></li>`;
                 }).join('');
                 locationOutput.innerHTML = `<strong>Found ${data.length}</strong><ul>${list}</ul>`;
                 console.log(data);
