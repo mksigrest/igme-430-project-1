@@ -145,7 +145,7 @@
     document.getElementById('locationSubmit').addEventListener('click', async (e) => {
         e.preventDefault();
 
-        const endpoint = document.getElementById('nameSubmit').closest('.endpoint');
+        const endpoint = document.getElementById('locationSubmit').closest('.endpoint');
         const name = endpoint.querySelector('.nameField').value.trim();
         const capital = endpoint.querySelector('.capitalField').value.trim();
 
