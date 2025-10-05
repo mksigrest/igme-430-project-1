@@ -23,7 +23,7 @@
                 <option value="get">GET</option>
                 <option value="head">HEAD</option>
             </select>
-            <input id="nameSubmit" type="submit" value="Get Country Name" />
+            <button id="nameSubmit">Get Country Countries</button>
         </div>
         <div id="nameOutput">
         </div>
@@ -39,7 +39,7 @@
                 <option value="get">GET</option>
                 <option value="head">HEAD</option>
             </select>
-            <input id="locationSubmit" type="submit" value="Get Country Location" />
+            <button id="locationSubmit">Get Country Location</button>
         </div>
         <div id="locationOutput">
         </div>
@@ -55,7 +55,7 @@
                 <option value="get">GET</option>
                 <option value="head">HEAD</option>
             </select>
-            <input id="financeSubmit" type="submit" value="Get Country Finances" />
+            <button id="financeSubmit">Get Country Finances</button>
         </div>
         <div id="financeOutput">
         </div>
@@ -67,7 +67,7 @@
                 <option value="get">GET</option>
                 <option value="head">HEAD</option>
             </select>
-            <input id="allSubmit" type="submit" value="Get All Countries" />
+            <button id="allSubmit">Get All Countries</button>
         </div>
         <div id="allOutput">
         </div>
@@ -79,7 +79,7 @@
             <input class="nameField" type="text" />
             <label for="capital">Capital: </label>
             <input class="capitalField" type="text" />
-            <input id="addSubmit" type="submit" value="Add Country" />
+            <button id="addSubmit">Add Country</button>
         </div>
         <div id="addOutput">
         </div>
@@ -93,7 +93,7 @@
             <input class="capitalField" type="text" />
             <label for="newCapital">New Capital: </label>
             <input class="newCapitalField" type="text" />
-            <input id="editSubmit" type="submit" value="Edit Country Capital" />
+            <button id="editSubmit">Edit Country Capital</button>
         </div>
         <div id="editOutput">
         </div>
@@ -101,13 +101,15 @@
     </div>
 </body>
 <script>
-    document.getElementById('allSubmit').addEventListener('submit', async (e) => {
+    document.getElementById('allSubmit').addEventListener('click', async (e) => {
         e.preventDefault();
 
         const url = document.getElementById('urlField').value;
         const method = document.getElementById('methodSelect').value.toUpperCase();
         const response = await fetch(url, { method });
         const allOutput = document.getElementById('allOutput');
+
+        console.log('Pressed');
 
         if (method !== 'HEAD') {
             if (response.ok) {
