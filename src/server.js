@@ -52,37 +52,31 @@ const server = http.createServer((request, response) => {
         }
     }
 
-    else if (pathName === '/api') {
-        if (!clientAcceptsJson(request)) {
-            resJSON(response, 406, { message: 'The request sent is not acceptable', id: 'notAcceptable' });
-            return;
+    else if (request.method === 'GET' || request.method === 'HEAD') {
+        let results = countries.slice();
+        if (pathName === '/api/getCountryName') {
+
         }
+        else if (pathName === '/api/getCountryLocation') {
 
-        else if (request.method === 'GET' || request.method === 'HEAD') {
-            let results = countries.slice();
-            if (pathName === '/api/getCountryName') {
-
-            }
-            else if (pathName === '/api/getCountryLocation') {
-
-            }
-            else if (pathName === '/api/getCountryFinance') {
-
-            }
-            else if (pathName === '/api/getAllCountries') {
-                resJSON(response, 200, results);
-            }
         }
+        else if (pathName === '/api/getCountryFinance') {
 
-        else if (request.method === 'POST') {
-            if (pathName === '/api/addCountry') {
-
-            }
-            else if (pathName === '/api/editCapital') {
-
-            }
+        }
+        else if (pathName === '/api/getAllCountries') {
+            resJSON(response, 200, results);
         }
     }
+
+    else if (request.method === 'POST') {
+        if (pathName === '/api/addCountry') {
+
+        }
+        else if (pathName === '/api/editCapital') {
+
+        }
+    }
+}
 
     else {
         resJSON(response, 404, { message: 'The page you are looking for was not found.', id: 'notFound' });
