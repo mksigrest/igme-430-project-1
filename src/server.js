@@ -76,7 +76,6 @@ const server = http.createServer((request, response) => {
 
         }
     }
-}
 
     else {
         resJSON(response, 404, { message: 'The page you are looking for was not found.', id: 'notFound' });
