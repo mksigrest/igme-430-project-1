@@ -102,20 +102,20 @@
     document.getElementById('nameSubmit').addEventListener('click', async (e) => {
         e.preventDefault();
 
-        const url = '/api/getCountryName';
+        const url = '/api/getCountryName' + (params.toString() ? `?${params.toString()}` : '');
         const method = document.getElementById('nameMethodSelect').value.toUpperCase();
         const response = await fetch(url, { method });
         const nameOutput = document.getElementById('nameOutput');
 
         if (method !== 'HEAD') {
-            if (response.retFil) {
+            if (response.ok) {
                 const data = await response.json();
 
                 const list = data.map(c => {
-                    const displayName = c.name || c.country || 'Unknown';
-                    const displayCap = 
-                })
-                nameOutput.innerHTML = `<strong>Success</strong> <br> <br> ${JSON.stringify(data)}`;
+                    const displayName = (c.name && (c.name.common || c.name))
+                    return `<li><strong>${displayName}</strong></li>`;
+                }).join('');
+                nameOutput.innerHTML = `<strong>Found ${data.length}</strong><ul>${list}</ul>`;
                 console.log(data);
             }
             else {
