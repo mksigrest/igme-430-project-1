@@ -52,7 +52,7 @@ const server = http.createServer((request, response) => {
         }
     }
 
-    else if (pathName === '/api/countries') {
+    else if (pathName === '/api') {
         if (!clientAcceptsJson(request)) {
             resJSON(response, 406, { message: 'The request sent is not acceptable', id: 'notAcceptable' });
             return;
@@ -60,13 +60,16 @@ const server = http.createServer((request, response) => {
 
         else if (method === 'GET' || method === 'HEAD') {
             let results = countries.slice();
-            if (searchParams.has('name')) {
+            if (pathName === '/api/getCountryName') {
 
             }
-            if (searchParams.has('reigon')) {
+            else if (pathName === '/api/getCountryLocation') {
 
             }
-            if (searchParams.has('limit')) {
+            else if (pathName === '/api/getCountryFinance') {
+
+            }
+            else if (pathName === '/api/getAllCountries') {
 
             }
         }
