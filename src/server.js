@@ -30,24 +30,24 @@ const server = http.createServer((request, response) => {
     const parsedUrl = url.parse(request.url, true);
     const pathName = parsedUrl.pathname;
 
-    if ((method === 'GET' || method === 'HEAD') && (pathName === '/' || pathname === '/client.html')) {
+    if ((request.method === 'GET' || request.method === 'HEAD') && (pathName === '/' || pathName === '/client.html')) {
         response.writeHead(200, { 'Content-Type': 'text/html' });
 
-        if (method === 'GET') {
+        if (request.method === 'GET') {
             response.end(fs.readFileSync(html));
         }
-        else if (method === 'HEAD') {
+        else if (request.method === 'HEAD') {
             response.end();
         }
     }
 
-    else if ((method === 'GET' || method === 'HEAD') && (pathName === '/client.css')) {
+    else if ((request.method === 'GET' || request.method === 'HEAD') && (pathName === '/client.css')) {
         response.writeHead(200, { 'Content-Type': 'text/css' });
 
-        if (method === 'GET') {
+        if (request.method === 'GET') {
             response.end(fs.readFileSync(style));
         }
-        else if (method === 'HEAD') {
+        else if (request.method === 'HEAD') {
             response.end();
         }
     }
@@ -58,7 +58,7 @@ const server = http.createServer((request, response) => {
             return;
         }
 
-        else if (method === 'GET' || method === 'HEAD') {
+        else if (request.method === 'GET' || request.method === 'HEAD') {
             let results = countries.slice();
             if (pathName === '/api/getCountryName') {
 
@@ -74,7 +74,7 @@ const server = http.createServer((request, response) => {
             }
         }
 
-        else if (method === 'POST') {
+        else if (request.method === 'POST') {
             if (pathName === '/api/addCountry') {
 
             }

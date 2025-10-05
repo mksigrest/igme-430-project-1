@@ -111,10 +111,14 @@
 
         if (method !== 'HEAD') {
             if (response.ok) {
-
+                const data = await response.json();
+                content.innerHTML = `<strong>Success</strong> <br> <br> ${JSON.stringify(data)}`;
+                console.log(data);
             }
             else {
-
+                const error = await response.json();
+                content.innerHTML = `<strong>Not Found</strong> <br> <br> Message: ${error.message}`;
+                console.log(error);
             }
         }
         else {
