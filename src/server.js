@@ -75,7 +75,12 @@ const server = http.createServer((request, response) => {
         }
 
         else if (method === 'POST') {
+            if (pathName === '/api/addCountry') {
 
+            }
+            else if (pathName === '/api/editCapital') {
+
+            }
         }
     }
 
