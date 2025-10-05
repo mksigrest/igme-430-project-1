@@ -70,7 +70,7 @@ const server = http.createServer((request, response) => {
 
             }
             else if (pathName === '/api/getAllCountries') {
-
+                resJSON(response, 200, results);
             }
         }
 
