@@ -105,7 +105,7 @@
         e.preventDefault();
 
         const url = '/api/getAllCountries';
-        const method = document.getElementById('methodSelect').value.toUpperCase();
+        const method = document.getElementById('allMethodSelect').value.toUpperCase();
         const response = await fetch(url, { method });
         const allOutput = document.getElementById('allOutput');
 
@@ -114,12 +114,12 @@
         if (method !== 'HEAD') {
             if (response.ok) {
                 const data = await response.json();
-                content.innerHTML = `<strong>Success</strong> <br> <br> ${JSON.stringify(data)}`;
+                allOutput.innerHTML = `<strong>Success</strong> <br> <br> ${JSON.stringify(data)}`;
                 console.log(data);
             }
             else {
                 const error = await response.json();
-                content.innerHTML = `<strong>Not Found</strong> <br> <br> Message: ${error.message}`;
+                allOutput.innerHTML = `<strong>Not Found</strong> <br> <br> Message: ${error.message}`;
                 console.log(error);
             }
         }
