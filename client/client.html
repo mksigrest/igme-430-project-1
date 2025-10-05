@@ -23,7 +23,7 @@
                 <option value="get">GET</option>
                 <option value="head">HEAD</option>
             </select>
-            <input type="submit" value="Get Country Name" />
+            <input id="nameSubmit" type="submit" value="Get Country Name" />
         </div>
         <div id="nameOutput">
         </div>
@@ -39,7 +39,7 @@
                 <option value="get">GET</option>
                 <option value="head">HEAD</option>
             </select>
-            <input type="submit" value="Get Country Location" />
+            <input id="locationSubmit" type="submit" value="Get Country Location" />
         </div>
         <div id="locationOutput">
         </div>
@@ -55,7 +55,7 @@
                 <option value="get">GET</option>
                 <option value="head">HEAD</option>
             </select>
-            <input type="submit" value="Get Country Finances" />
+            <input id="financeSubmit" type="submit" value="Get Country Finances" />
         </div>
         <div id="financeOutput">
         </div>
@@ -67,7 +67,7 @@
                 <option value="get">GET</option>
                 <option value="head">HEAD</option>
             </select>
-            <input type="submit" value="Get All Countries" />
+            <input id="allSubmit "type="submit" value="Get All Countries" />
         </div>
         <div id="allOutput">
         </div>
@@ -79,7 +79,7 @@
             <input class="nameField" type="text" />
             <label for="capital">Capital: </label>
             <input class="capitalField" type="text" />
-            <input type="submit" value="Add Country" />
+            <input id="addSubmit "type="submit" value="Add Country" />
         </div>
         <div id="addOutput">
         </div>
@@ -93,7 +93,7 @@
             <input class="capitalField" type="text" />
             <label for="newCapital">New Capital: </label>
             <input class="newCapitalField" type="text" />
-            <input type="submit" value="Edit Country Capital" />
+            <input id="editSubmit "type="submit" value="Edit Country Capital" />
         </div>
         <div id="editOutput">
         </div>
@@ -101,6 +101,8 @@
     </div>
 </body>
 <script>
-
+    document.getElementById('allSubmit').addEventListener('submit', async (e) => {
+        e.preventDefault();
+    })
 </script>
 </html>
