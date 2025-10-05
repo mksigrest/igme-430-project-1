@@ -53,9 +53,18 @@ const server = http.createServer((request, response) => {
     }
 
     else if (request.method === 'GET' || request.method === 'HEAD') {
-        let results = countries.slice();
         if (pathName === '/api/getCountryName') {
-
+            const { region, capital } = parsedUrl.query;
+            const results = countries.filter((c) => {
+                let retFilt;
+                if (region) {
+                    retFilt = c.region;
+                }
+                if (capital) {
+                    retFilt = retFilt && c.capital;
+                }
+                resJSON(response, 200, retFilt);
+            });
         }
         else if (pathName === '/api/getCountryLocation') {
 
