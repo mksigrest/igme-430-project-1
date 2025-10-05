@@ -19,7 +19,7 @@
             <input class="subRegionField" type="text" />
             <label for="capital">Capital: </label>
             <input class="capitalField" type="text" />
-            <select>
+            <select id="nameMethodSelect">
                 <option value="get">GET</option>
                 <option value="head">HEAD</option>
             </select>
@@ -35,7 +35,7 @@
             <input class="nameField" type="text" />
             <label for="capital">Capital: </label>
             <input class="capitalField" type="text" />
-            <select>
+            <select id="locationMethodSelect">
                 <option value="get">GET</option>
                 <option value="head">HEAD</option>
             </select>
@@ -51,7 +51,7 @@
             <input class="nameField" type="text" />
             <label for="capital">Capital: </label>
             <input class="capitalField" type="text" />
-            <select>
+            <select id="financeMethodSelect">
                 <option value="get">GET</option>
                 <option value="head">HEAD</option>
             </select>
@@ -63,7 +63,7 @@
 
         <div class="endpoint">
             <h3>getAllCountries</h3>
-            <select>
+            <select id="allMethodSelect">
                 <option value="get">GET</option>
                 <option value="head">HEAD</option>
             </select>
@@ -104,7 +104,7 @@
     document.getElementById('allSubmit').addEventListener('click', async (e) => {
         e.preventDefault();
 
-        const url = document.getElementById('urlField').value;
+        const url = '/api/getAllCountries';
         const method = document.getElementById('methodSelect').value.toUpperCase();
         const response = await fetch(url, { method });
         const allOutput = document.getElementById('allOutput');
