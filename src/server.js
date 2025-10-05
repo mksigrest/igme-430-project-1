@@ -84,7 +84,18 @@ const server = http.createServer((request, response) => {
             resJSON(response, 200, resultsF);
         }
         else if (pathName === '/api/getCountryFinance') {
-
+            const { name, capital } = parsedUrl.query;
+            const resultsF = countries.filter((c) => {
+                let retFilt = true;
+                if (name) {
+                    retFilt = retFilt && c.name && c.name.toLowerCase().includes(name.toLowerCase().trim());
+                }
+                if (capital) {
+                    retFilt = retFilt && c.capital && c.capital.toLowerCase().includes(capital.toLowerCase().trim());
+                }
+                return retFilt
+            });
+            resJSON(response, 200, resultsF);
         }
         else if (pathName === '/api/getAllCountries') {
             resJSON(response, 200, results);
