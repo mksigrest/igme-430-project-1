@@ -165,7 +165,7 @@
                 console.log(data);
             }
             else {
-                const error = await response.json();
+                const error = response.json();
                 nameOutput.innerHTML = `<strong>Not Found</strong> <br> <br> Message: ${error.message}`;
                 console.log(error);
             }
