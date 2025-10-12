@@ -298,5 +298,15 @@
             }
         });
     })
+
+    document.getElementById('editSubmit').addEventListener('click', async (e) => {
+        e.preventDefault();
+        const endpoint = document.getElementById('editSubmit').closest('.endpoint');
+        const url = '/api/editCapital';
+        const addOutput = document.getElementById('editOutput');
+
+
+
+    })
 </script>
 </html>
