@@ -104,7 +104,7 @@ const server = http.createServer((request, response) => {
     
     else if (request.method === 'POST') {
         if (pathName === '/api/addCountry') {
-            const body = parseRequestBody(request);
+            const body = JSON.parse(request);
             const { name, capital, longitude, latitude } = body;
             const nameE = countries.find((c) => c.name.toLowerCase() === String(name).toLowerCase());
             const capitalE = countries.find((c) => c.capital.toLowerCase() === String(capital).toLowerCase());
