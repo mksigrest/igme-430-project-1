@@ -287,15 +287,15 @@
             },
             body: JSON.stringify(body),
         })
-        .then((response) => {
-            if (response.status === 201) {
-                addOutput.innerHTML = `Succesfully created the country ${body.name} with 
-                a capital of ${body.capital}at Long: ${body.longitude} Lat: ${body.latitude}!`;
-                return response.json()
-            }
-            else {
-                addOutput.innerHTML = `Adding error`;
-            }
+            .then((response) => {
+                if (response.status === 201) {
+                    addOutput.innerHTML = `Succesfully created the country ${body.name} with 
+                    a capital of ${body.capital}at Long: ${body.longitude} Lat: ${body.latitude}!`;
+                    return response.json()
+                }
+                else {
+                    addOutput.innerHTML = `Adding error`;
+                }
         });
     })
 
@@ -305,8 +305,30 @@
         const url = '/api/editCapital';
         const addOutput = document.getElementById('editOutput');
 
+        const body = {
+            name: endpoint.querySelector('.nameField').value.trim(),
+            capital: endpoint.querySelectpr('.capitalField').value.trim(),
+            newCapital: endpoint.querySelector('.newCapitalField').value.trim(),
+        }
 
-
+        const response = fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(body),
+        })
+            .then((response) => {
+                if (response.status === 201) {
+                    editOutput.innerHTML = `Succesfully edited country capital 
+                    ${capital} to ${newCapital}!`;
+                    return response.json()
+                }
+                else {
+                    editOutput.innerHTML = `Editing error`;
+                }
+            })
     })
 </script>
 </html>
