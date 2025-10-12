@@ -271,15 +271,11 @@
         const endpoint = document.getElementById('addSubmit').closest('.endpoint');
 
         const body = {
-            name: endpoint.querySelector('.nameField').value.trim();
-            capital: endpoint.querySelector('.capitalField').value.trim();
+            name: endpoint.querySelector('.nameField').value.trim(),
+            capital: endpoint.querySelector('.capitalField').value.trim(),
+            longitude: endpoint.querySelector('.longField').value.trim(),
+            latitude: endpoint.querySelector('.latitField').value.trim(),
         }
-
-        
-        const name = 
-        const capital = 
-        const longitude = endpoint.querySelector('.longField').value.trim();
-        const latitude = endpoint.querySelector('.latitField').value.trim();
 
         const url = '/api/addCountry';
         const response = await fetch(url, { method });
