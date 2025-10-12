@@ -103,12 +103,26 @@
     </div>
 </body>
 <script>
+    /*
     nameSub = document.getElementById('nameSubmit');
     locSub = document.getElementById('locationSubmit');
     finSub = document.getElementById('financeSubmit');
+    */
+    function getHeadFun(e, subType, urlBase) {
+        e.preventDefault();
 
-    function getHeadFun(e, subType, url) {
+        const endpoint = document.getElementById(subType).closest('.endpoint');
+        const name = endpoint.querySelector('.nameField').value.trim();
+        const capital = endpoint.querySelector('.capitalField').value.trim();
+        const region = endpoint.querySelector('.regionField').value.trim();
 
+        const params = new URLSearchParams();
+        if (name) params.append('name', name);
+        if (capital) params.append('capital', capital);
+        if (region) params.append('region', region);
+
+        const url = urlBase + (params.toString() ? `?${params.toString()}` : '');
+        const method = document.getElementById('nameMethodSelect').value.toUpperCase();
     }
 
     document.getElementById('nameSubmit').addEventListener('click', async (e) => {
