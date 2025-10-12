@@ -268,43 +268,24 @@
 
     document.getElementById('addSubmit').addEventListener('click', async (e) => {
         e.preventDefault();
-
         const endpoint = document.getElementById('addSubmit').closest('.endpoint');
-        const name = endpoint.querySelector('.nameField').value.trim();
-        const capital = endpoint.querySelector('.capitalField').value.trim();
+
+        const body = {
+            name: endpoint.querySelector('.nameField').value.trim();
+            capital: endpoint.querySelector('.capitalField').value.trim();
+        }
+
+        
+        const name = 
+        const capital = 
         const longitude = endpoint.querySelector('.longField').value.trim();
         const latitude = endpoint.querySelector('.latitField').value.trim();
 
-        const params = new URLSearchParams();
-        if (name) params.append('name', name);
-        if (capital) params.append('capital', capital);
-        if (longitude) params.append('longitude', longitude);
-        if (latitude) params.append('latitude', latitude);
-
         const url = '/api/addCountry';
         const response = await fetch(url, { method });
-        const allOutput = document.getElementById('allOutput');
+        const addOutput = document.getElementById('addOutput');
 
-        if (method !== 'HEAD') {
-            if (response.ok) {
-                const data = await response.json();
-                allOutput.innerHTML = `<strong>Success</strong> <br> <br> ${JSON.stringify(data)}`;
-                console.log(data);
-            }
-            else {
-                const error = await response.json();
-                allOutput.innerHTML = `<strong>Not Found</strong> <br> <br> Message: ${error.message}`;
-                console.log(error);
-            }
-        }
-        else {
-            if (response.ok) {
-                allOutput.innerHTML = `<strong>Success</strong>`
-            }
-            else {
-                allOutput.innerHTML = `<strong>Not Found</strong>`
-            }
-        }
+        
     })
 </script>
 </html>
