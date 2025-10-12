@@ -101,16 +101,19 @@ const server = http.createServer((request, response) => {
             resJSON(response, 200, results);
         }
     }
-    /*
+    
     else if (request.method === 'POST') {
         if (pathName === '/api/addCountry') {
-
+            const { name, capital, longitude, latitude } = body;
+            const nameE = countries.find((c) => c.name.toLowerCase === String(name).toLowerCase());
+            const capitalE
         }
+        /*
         else if (pathName === '/api/editCapital') {
 
-        }
+        }*/
     }
-    */
+    
     else {
         resJSON(response, 404, { message: 'The page you are looking for was not found.', id: 'notFound' });
     }
