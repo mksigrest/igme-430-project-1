@@ -107,7 +107,7 @@
     locSub = document.getElementById('locationSubmit');
     finSub = document.getElementById('financeSubmit');
     
-    async function getHeadFun(e, subType, urlBase) {
+    async function getHeadFun(e, subType, urlBase, subOutput) {
         e.preventDefault();
 
         const endpoint = document.getElementById(subType).closest('.endpoint');
@@ -129,7 +129,7 @@
         const url = urlBase + (params.toString() ? `?${params.toString()}` : '');
         const method = document.getElementById('nameMethodSelect').value.toUpperCase();
         const response = await fetch(url, { method });
-        const funOutput = document.getElementById(subType);
+        const funOutput = document.getElementById(subOutput);
 
         if (method !== 'HEAD') {
             if (response.ok) {
@@ -187,7 +187,7 @@
     }
 
     document.getElementById('nameSubmit').addEventListener('click', async (e) => {
-        getHeadFun(e, 'nameSubmit', '/api/getCountryName');
+        getHeadFun(e, 'nameSubmit', '/api/getCountryName', 'nameOutput');
         /*
         e.preventDefault();
 
@@ -232,7 +232,7 @@
     })
 
     document.getElementById('locationSubmit').addEventListener('click', async (e) => {
-        getHeadFun(e, 'locationSubmit', '/api/getCountryLocation');
+        getHeadFun(e, 'locationSubmit', '/api/getCountryLocation', 'loctionOutput');
         /*
         e.preventDefault();
 
@@ -279,7 +279,7 @@
     })
 
     document.getElementById('financeSubmit').addEventListener('click', async (e) => {
-        getHeadFun(e, 'financeSubmit', '/api/getCountryFinance');
+        getHeadFun(e, 'financeSubmit', '/api/getCountryFinance', 'financeOutput');
         /*
         e.preventDefault();
 
@@ -326,7 +326,7 @@
     })
 
     document.getElementById('allSubmit').addEventListener('click', async (e) => {
-        getHeadFun(e, 'allSubmit', '/api/getAllCountries');
+        getHeadFun(e, 'allSubmit', '/api/getAllCountries', 'allOutput');
         /*
         e.preventDefault();
 
