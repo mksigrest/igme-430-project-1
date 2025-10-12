@@ -269,8 +269,13 @@
     document.getElementById('addSubmit').addEventListener('click', async (e) => {
         e.preventDefault();
 
+        const endpoint = document.getElementById('addSubmit').closest('.endpoint');
+        const name = endpoint.querySelector('.nameField').value.trim();
+        const capital = endpoint.querySelector('.capitalField').value.trim();
+        const longitude = endpoint.querySelector('.longField').value.trim();
+        const latitude = endpoint.querySelector('.latitField').value.trim();
+
         const url = '/api/addCountry';
-        const method = document.getElementById('allMethodSelect').value.toUpperCase();
         const response = await fetch(url, { method });
         const allOutput = document.getElementById('allOutput');
 
