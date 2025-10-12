@@ -112,6 +112,13 @@ const server = http.createServer((request, response) => {
                 resJSON(response, 400, 'Country/Capital already exists');
                 return;
             }
+
+            const newCountry = {
+                name: String(body.name),
+                capital: String(body.capital),
+                longitude: String(body.longitude),
+                latitude: String(body.latitude),
+            };
         }
         /*
         else if (pathName === '/api/editCapital') {
