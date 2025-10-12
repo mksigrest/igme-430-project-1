@@ -133,10 +133,17 @@ const server = http.createServer((request, response) => {
                 resJSON(response, 201, newCountry);
             });
         }
-        /*
+        
         else if (pathName === '/api/editCapital') {
+            let rawBody = '';
+            request.on('data', chunk => {
+                rawBody += chunk;
+            })
 
-        }*/
+            request.on('end', () => {
+
+            })
+        }
     }
     
     else {
