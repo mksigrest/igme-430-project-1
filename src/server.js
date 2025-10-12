@@ -145,16 +145,15 @@ const server = http.createServer((request, response) => {
                 const { name, capital, newCapital } = body;
                 const nameE = countries.find((c) => c.name.toLowerCase() === String(name).toLowerCase());
                 const capitalE = countries.find((c) => c.capital.toLowerCase() === String(capital).toLowerCase());
-                const newCapitalE = countries.find((c) => c.newCapital.toLowerCase() === String(newCapital).toLowerCase());
 
-                if (nameE || capitalE || newCapitalE) {
+                if (nameE || capitalE) {
                     resJSON(response, 400, 'Country/Capital already exists');
                     return;
                 }
 
-                const country = countries.find((c) => c.name.toLowerCase());
+                const country = countries.find((c) => c.name.toLowerCase() === name.toLowerCase());
                 country.capital = String(body.capital);
-                resJSON(respone, 200, country);
+                resJSON(response, 200, country);
             })
         }
     }
