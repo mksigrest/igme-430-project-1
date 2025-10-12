@@ -106,7 +106,12 @@ const server = http.createServer((request, response) => {
         if (pathName === '/api/addCountry') {
             const { name, capital, longitude, latitude } = body;
             const nameE = countries.find((c) => c.name.toLowerCase === String(name).toLowerCase());
-            const capitalE
+            const capitalE = countries.find((c) => c.capital.toLowerCase === String(capital).toLowerCase());
+
+            if (nameE || capitalE) {
+                resJSON(response, 400, 'Country/Capital already exists');
+                return;
+            }
         }
         /*
         else if (pathName === '/api/editCapital') {
