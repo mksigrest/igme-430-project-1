@@ -103,11 +103,10 @@
     </div>
 </body>
 <script>
-    /*
     nameSub = document.getElementById('nameSubmit');
     locSub = document.getElementById('locationSubmit');
     finSub = document.getElementById('financeSubmit');
-    */
+    
     function getHeadFun(e, subType, urlBase) {
         e.preventDefault();
 
@@ -139,14 +138,28 @@
                 }
 
                 if (subType === 'locationSubmit') {
-
+                    const list = data.map(c => {
+                        const displayName = (c.name && (c.name.common || c.name))
+                        const displayLat = (c.latitude);
+                        const displayLog = (c.longitude);
+                        return `<li><strong>${displayName}</strong> - Lat: ${displayLat} - Long: ${displayLog}</li>`;
+                    }).join('');
+                    funOutput.innerHTML = `<strong>Found ${data.length}</strong><ul>${list}</ul>`;
                 }
 
                 if (subType === 'financeSubmit') {
-
+                    const list = data.map(c => {
+                        const displayName = (c.name && (c.name.common || c.name))
+                        const displayCurName = (c.finance.currency_name);
+                        const displayCurSym = (c.finance.currency_symbol);
+                        return `<li><strong>${displayName}</strong> - Currency Name: ${displayCurName} - Currency Symbol: ${displayCurSym}</li>`;
+                    }).join('');
+                    funOutput.innerHTML = `<strong>Found ${data.length}</strong><ul>${list}</ul>`;
                 }
 
-                else { }
+                else {
+                    funOutput.innerHTML = `<strong>Success</strong> <br> <br> ${JSON.stringify(data)}`;
+                }
 
                 
                 console.log(data);
