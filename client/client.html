@@ -130,11 +130,25 @@
             if (response.ok) {
                 const data = await response.json();
 
-                const list = data.map(c => {
-                    const displayName = (c.name && (c.name.common || c.name))
-                    return `<li><strong>${displayName}</strong></li>`;
-                }).join('');
-                nameOutput.innerHTML = `<strong>Found ${data.length}</strong><ul>${list}</ul>`;
+                if (subType === 'nameSubmit') {
+                    const list = data.map(c => {
+                        const displayName = (c.name && (c.name.common || c.name))
+                        return `<li><strong>${displayName}</strong></li>`;
+                    }).join('');
+                    funOutput.innerHTML = `<strong>Found ${data.length}</strong><ul>${list}</ul>`;
+                }
+
+                if (subType === 'locationSubmit') {
+
+                }
+
+                if (subType === 'financeSubmit') {
+
+                }
+
+                else { }
+
+                
                 console.log(data);
             }
             else {
