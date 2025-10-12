@@ -275,6 +275,12 @@
         const longitude = endpoint.querySelector('.longField').value.trim();
         const latitude = endpoint.querySelector('.latitField').value.trim();
 
+        const params = new URLSearchParams();
+        if (name) params.append('name', name);
+        if (capital) params.append('capital', capital);
+        if (longitude) params.append('longitude', longitude);
+        if (latitude) params.append('latitude', latitude);
+
         const url = '/api/addCountry';
         const response = await fetch(url, { method });
         const allOutput = document.getElementById('allOutput');
