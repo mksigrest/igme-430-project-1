@@ -107,7 +107,7 @@
     locSub = document.getElementById('locationSubmit');
     finSub = document.getElementById('financeSubmit');
     
-    function getHeadFun(e, subType, urlBase) {
+    async function getHeadFun(e, subType, urlBase) {
         e.preventDefault();
 
         const endpoint = document.getElementById(subType).closest('.endpoint');
@@ -128,12 +128,12 @@
 
         const url = urlBase + (params.toString() ? `?${params.toString()}` : '');
         const method = document.getElementById('nameMethodSelect').value.toUpperCase();
-        const response = fetch(url, { method });
+        const response = await fetch(url, { method });
         const funOutput = document.getElementById(subType);
 
         if (method !== 'HEAD') {
             if (response.ok) {
-                const data = response.json();
+                const data = await response.json();
 
                 if (subType === 'nameSubmit') {
                     const list = data.map(c => {
