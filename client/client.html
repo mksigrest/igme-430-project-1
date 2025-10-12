@@ -122,12 +122,12 @@
 
         const url = urlBase + (params.toString() ? `?${params.toString()}` : '');
         const method = document.getElementById('nameMethodSelect').value.toUpperCase();
-        const response = await fetch(url, { method });
+        const response = fetch(url, { method });
         const funOutput = document.getElementById(subType);
 
         if (method !== 'HEAD') {
             if (response.ok) {
-                const data = await response.json();
+                const data = response.json();
 
                 if (subType === 'nameSubmit') {
                     const list = data.map(c => {
