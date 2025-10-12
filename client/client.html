@@ -269,6 +269,9 @@
     document.getElementById('addSubmit').addEventListener('click', async (e) => {
         e.preventDefault();
         const endpoint = document.getElementById('addSubmit').closest('.endpoint');
+        const url = '/api/addCountry';
+        const response = await fetch(url, { method });
+        const addOutput = document.getElementById('addOutput');
 
         const body = {
             name: endpoint.querySelector('.nameField').value.trim(),
@@ -277,11 +280,12 @@
             latitude: endpoint.querySelector('.latitField').value.trim(),
         }
 
-        const url = '/api/addCountry';
-        const response = await fetch(url, { method });
-        const addOutput = document.getElementById('addOutput');
-
-        
+        if (response.ok) {
+            addOutput.innerHTML = `Succesfully created the country ${name} with a capital of ${capital} at Long: ${longitude} Lat: ${latitude}!`;
+        }
+        else {
+            addOutput.innerHTML = `Adding error`;
+        }
     })
 </script>
 </html>
