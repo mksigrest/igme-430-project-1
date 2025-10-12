@@ -113,7 +113,7 @@ const server = http.createServer((request, response) => {
                 console.log('Raw body: ', rawBody);
                 const body = JSON.parse(rawBody);
                 console.log('Parsed body: ', body);
-                const { name, capital, longitude, latitude } = body;
+                const { name, capital } = body;
                 const nameE = countries.find((c) => c.name.toLowerCase() === String(name).toLowerCase());
                 const capitalE = countries.find((c) => c.capital.toLowerCase() === String(capital).toLowerCase());
 
@@ -141,7 +141,20 @@ const server = http.createServer((request, response) => {
             })
 
             request.on('end', () => {
+                const body = JSON.parse(rawBody);
+                const { name, capital, newCapital } = body;
+                const nameE = countries.find((c) => c.name.toLowerCase() === String(name).toLowerCase());
+                const capitalE = countries.find((c) => c.capital.toLowerCase() === String(capital).toLowerCase());
+                const newCapitalE = countries.find((c) => c.newCapital.toLowerCase() === String(newCapital).toLowerCase());
 
+                if (nameE || capitalE || newCapitalE) {
+                    resJSON(response, 400, 'Country/Capital already exists');
+                    return;
+                }
+
+                const country = countries.find((c) => c.name.toLowerCase());
+                country.capital = String(body.capital);
+                resJSON(respone, 200, country);
             })
         }
     }
