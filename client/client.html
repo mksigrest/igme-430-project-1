@@ -289,8 +289,8 @@
         })
         .then((response) => {
             if (response.status === 201) {
-                addOutput.innerHTML = `Succesfully created the country ${data.name} with 
-                a capital of ${data.capital}at Long: ${data.longitude} Lat: ${latitude}!`;
+                addOutput.innerHTML = `Succesfully created the country ${body.name} with 
+                a capital of ${body.capital}at Long: ${body.longitude} Lat: ${body.latitude}!`;
                 return response.json()
             }
             else {
