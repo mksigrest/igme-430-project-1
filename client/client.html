@@ -123,6 +123,34 @@
 
         const url = urlBase + (params.toString() ? `?${params.toString()}` : '');
         const method = document.getElementById('nameMethodSelect').value.toUpperCase();
+        const response = await fetch(url, { method });
+        const funOutput = document.getElementById(subType);
+
+        if (method !== 'HEAD') {
+            if (response.ok) {
+                const data = await response.json();
+
+                const list = data.map(c => {
+                    const displayName = (c.name && (c.name.common || c.name))
+                    return `<li><strong>${displayName}</strong></li>`;
+                }).join('');
+                nameOutput.innerHTML = `<strong>Found ${data.length}</strong><ul>${list}</ul>`;
+                console.log(data);
+            }
+            else {
+                const error = await response.json();
+                nameOutput.innerHTML = `<strong>Not Found</strong> <br> <br> Message: ${error.message}`;
+                console.log(error);
+            }
+        }
+        else {
+            if (response.ok) {
+                nameOutput.innerHTML = `<strong>Success</strong>`
+            }
+            else {
+                nameOutput.innerHTML = `<strong>Not Found</strong>`
+            }
+        }
     }
 
     document.getElementById('nameSubmit').addEventListener('click', async (e) => {
