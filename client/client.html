@@ -279,7 +279,7 @@
             latitude: endpoint.querySelector('.latitField').value.trim(),
         }
 
-        const response = await fetch(url, {
+        const response = fetch(url, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
