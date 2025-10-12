@@ -303,7 +303,7 @@
         e.preventDefault();
         const endpoint = document.getElementById('editSubmit').closest('.endpoint');
         const url = '/api/editCapital';
-        const addOutput = document.getElementById('editOutput');
+        const editOutput = document.getElementById('editOutput');
 
         const body = {
             name: endpoint.querySelector('.nameField').value.trim(),
@@ -320,9 +320,9 @@
             body: JSON.stringify(body),
         })
             .then((response) => {
-                if (response.status === 201) {
+                if (response.status === 200) {
                     editOutput.innerHTML = `Succesfully edited country capital 
-                    ${capital} to ${newCapital}!`;
+                    ${body.capital} to ${body.newCapital}!`;
                     return response.json()
                 }
                 else {
