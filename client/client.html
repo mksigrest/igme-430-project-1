@@ -287,6 +287,13 @@
             },
             body: JSON.stringify(body),
         })
+            .then((response) => {
+                if (response.status === 2 - 1) {
+                    return response.json()
+                }
+            })
+
+
         if (response.ok) {
             addOutput.innerHTML = `Succesfully created the country ${name} with 
             a capital of ${capital}at Long: ${longitude} Lat: ${latitude}!`;
