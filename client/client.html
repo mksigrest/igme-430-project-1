@@ -261,5 +261,35 @@
             }
         }
     })
+
+    document.getElementById('addSubmit').addEventListener('click', async (e) => {
+        e.preventDefault();
+
+        const url = '/api/addCountry';
+        const method = document.getElementById('allMethodSelect').value.toUpperCase();
+        const response = await fetch(url, { method });
+        const allOutput = document.getElementById('allOutput');
+
+        if (method !== 'HEAD') {
+            if (response.ok) {
+                const data = await response.json();
+                allOutput.innerHTML = `<strong>Success</strong> <br> <br> ${JSON.stringify(data)}`;
+                console.log(data);
+            }
+            else {
+                const error = await response.json();
+                allOutput.innerHTML = `<strong>Not Found</strong> <br> <br> Message: ${error.message}`;
+                console.log(error);
+            }
+        }
+        else {
+            if (response.ok) {
+                allOutput.innerHTML = `<strong>Success</strong>`
+            }
+            else {
+                allOutput.innerHTML = `<strong>Not Found</strong>`
+            }
+        }
+    })
 </script>
 </html>
