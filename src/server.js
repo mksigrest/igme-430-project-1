@@ -105,28 +105,32 @@ const server = http.createServer((request, response) => {
     else if (request.method === 'POST') {
         if (pathName === '/api/addCountry') {
             let rawBody = '';
+            request.on('data', chunk => {
+                rawBody += chunk;
+            });
 
+            request.on('end', () => {
+                const body = JSON.parse();
+                const { name, capital, longitude, latitude } = body;
+                const nameE = countries.find((c) => c.name.toLowerCase() === String(name).toLowerCase());
+                const capitalE = countries.find((c) => c.capital.toLowerCase() === String(capital).toLowerCase());
 
-            const body = JSON.parse();
-            const { name, capital, longitude, latitude } = body;
-            const nameE = countries.find((c) => c.name.toLowerCase() === String(name).toLowerCase());
-            const capitalE = countries.find((c) => c.capital.toLowerCase() === String(capital).toLowerCase());
+                if (nameE || capitalE) {
+                    resJSON(response, 400, 'Country/Capital already exists');
+                    return;
+                }
 
-            if (nameE || capitalE) {
-                resJSON(response, 400, 'Country/Capital already exists');
-                return;
+                const newCountry = {
+                    name: String(body.name),
+                    capital: String(body.capital),
+                    longitude: body.longitude,
+                    latitude: body.latitude,
+                };
+
+                countries.push(newCountry);
+                resJSON(response, 201, newCountry);
             }
-
-            const newCountry = {
-                name: String(body.name),
-                capital: String(body.capital),
-                longitude: body.longitude,
-                latitude: body.latitude,
-            };
-
-            countries.push(newCountry);
-            resJSON(response, 201, newCountry);
-        }
+            })
         /*
         else if (pathName === '/api/editCapital') {
 
