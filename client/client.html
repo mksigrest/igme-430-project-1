@@ -119,7 +119,7 @@
             if (capital) params.append('capital', capital);
             if (region) params.append('region', region);
         }
-        else if (subType = 'locationSubmit' || subType = 'financeSubmit') {
+        else if (subType === 'locationSubmit' || subType === 'financeSubmit') {
             const name = endpoint.querySelector('.nameField').value.trim();
             const capital = endpoint.querySelector('.capitalField').value.trim();
             if (name) params.append('name', name);
