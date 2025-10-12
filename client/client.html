@@ -109,7 +109,6 @@
     
     async function getHeadFun(e, subType, urlBase, subOutput) {
         e.preventDefault();
-
         const endpoint = document.getElementById(subType).closest('.endpoint');
 
         const params = new URLSearchParams();
@@ -142,7 +141,6 @@
                     }).join('');
                     funOutput.innerHTML = `<strong>Found ${data.length}</strong><ul>${list}</ul>`;
                 }
-
                 else if (subType === 'locationSubmit') {
                     const list = data.map(c => {
                         const displayName = (c.name && (c.name.common || c.name))
@@ -152,7 +150,6 @@
                     }).join('');
                     funOutput.innerHTML = `<strong>Found ${data.length}</strong><ul>${list}</ul>`;
                 }
-
                 else if (subType === 'financeSubmit') {
                     const list = data.map(c => {
                         const displayName = (c.name && (c.name.common || c.name))
@@ -162,12 +159,10 @@
                     }).join('');
                     funOutput.innerHTML = `<strong>Found ${data.length}</strong><ul>${list}</ul>`;
                 }
-
                 else {
                     funOutput.innerHTML = `<strong>Success</strong> <br> <br> ${JSON.stringify(data)}`;
                 }
 
-                
                 console.log(data);
             }
             else {
