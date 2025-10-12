@@ -110,7 +110,9 @@ const server = http.createServer((request, response) => {
             });
 
             request.on('end', () => {
+                console.log('Raw body: ', rawBody);
                 const body = JSON.parse(rawBody);
+                console.log('Parsed body: ', body);
                 const { name, capital, longitude, latitude } = body;
                 const nameE = countries.find((c) => c.name.toLowerCase() === String(name).toLowerCase());
                 const capitalE = countries.find((c) => c.capital.toLowerCase() === String(capital).toLowerCase());
