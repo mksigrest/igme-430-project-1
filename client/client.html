@@ -279,7 +279,14 @@
             latitude: endpoint.querySelector('.latitField').value.trim(),
         }
 
-        const response = await fetch(url, { method });
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json'
+            },
+            body: JSON.stringify(body),
+        })
         if (response.ok) {
             addOutput.innerHTML = `Succesfully created the country ${name} with 
             a capital of ${capital}at Long: ${longitude} Lat: ${latitude}!`;
