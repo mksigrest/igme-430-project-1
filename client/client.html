@@ -270,7 +270,6 @@
         e.preventDefault();
         const endpoint = document.getElementById('addSubmit').closest('.endpoint');
         const url = '/api/addCountry';
-        const response = await fetch(url, { method });
         const addOutput = document.getElementById('addOutput');
 
         const body = {
@@ -280,8 +279,11 @@
             latitude: endpoint.querySelector('.latitField').value.trim(),
         }
 
+        const response = await fetch(url, { method });
         if (response.ok) {
-            addOutput.innerHTML = `Succesfully created the country ${name} with a capital of ${capital} at Long: ${longitude} Lat: ${latitude}!`;
+            addOutput.innerHTML = `Succesfully created the country ${name} with 
+            a capital of ${capital}at Long: ${longitude} Lat: ${latitude}!`;
+
         }
         else {
             addOutput.innerHTML = `Adding error`;
