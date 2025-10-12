@@ -143,13 +143,6 @@ const server = http.createServer((request, response) => {
             request.on('end', () => {
                 const body = JSON.parse(rawBody);
                 const { name, capital, newCapital } = body;
-                const nameE = countries.find((c) => c.name.toLowerCase() === String(name).toLowerCase());
-                const capitalE = countries.find((c) => c.capital.toLowerCase() === String(capital).toLowerCase());
-
-                if (nameE || capitalE) {
-                    resJSON(response, 400, 'Country/Capital already exists');
-                    return;
-                }
 
                 const country = countries.find((c) => c.name.toLowerCase() === name.toLowerCase());
                 country.capital = String(body.capital);
