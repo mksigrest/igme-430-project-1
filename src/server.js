@@ -129,8 +129,8 @@ const server = http.createServer((request, response) => {
 
                 countries.push(newCountry);
                 resJSON(response, 201, newCountry);
-            }
-            })
+            });
+        }
         /*
         else if (pathName === '/api/editCapital') {
 
