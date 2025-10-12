@@ -119,6 +119,9 @@ const server = http.createServer((request, response) => {
                 longitude: String(body.longitude),
                 latitude: String(body.latitude),
             };
+
+            countries.push(newCountry);
+            resJSON(response, 201, newCountry);
         }
         /*
         else if (pathName === '/api/editCapital') {
