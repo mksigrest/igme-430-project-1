@@ -181,6 +181,8 @@
     }
 
     document.getElementById('nameSubmit').addEventListener('click', async (e) => {
+        getHeadFun(e, 'nameSubmit', '/api/getCountryName');
+        /*
         e.preventDefault();
 
         const endpoint = document.getElementById('nameSubmit').closest('.endpoint');
@@ -220,10 +222,12 @@
             else {
                 nameOutput.innerHTML = `<strong>Not Found</strong>`
             }
-        }
+        }*/
     })
 
     document.getElementById('locationSubmit').addEventListener('click', async (e) => {
+        getHeadFun(e, 'locationSubmit', '/api/getCountryLocation');
+        /*
         e.preventDefault();
 
         const endpoint = document.getElementById('locationSubmit').closest('.endpoint');
@@ -265,10 +269,12 @@
             else {
                 locationOutput.innerHTML = `<strong>Not Found</strong>`
             }
-        }
+        }*/
     })
 
     document.getElementById('financeSubmit').addEventListener('click', async (e) => {
+        getHeadFun(e, 'financeSubmit', '/api/getCountryFinance');
+        /*
         e.preventDefault();
 
         const endpoint = document.getElementById('financeSubmit').closest('.endpoint');
@@ -310,10 +316,12 @@
             else {
                 locationOutput.innerHTML = `<strong>Not Found</strong>`
             }
-        }
+        }*/
     })
 
     document.getElementById('allSubmit').addEventListener('click', async (e) => {
+        getHeadFun(e, 'allSubmit', '/api/getAllCountries');
+        /*
         e.preventDefault();
 
         const url = '/api/getAllCountries';
@@ -340,7 +348,7 @@
             else {
                 allOutput.innerHTML = `<strong>Not Found</strong>`
             }
-        }
+        }*/
     })
 
     document.getElementById('addSubmit').addEventListener('click', async (e) => {
