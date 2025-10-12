@@ -287,16 +287,16 @@
             },
             body: JSON.stringify(body),
         })
-            .then((response) => {
-                if (response.status === 201) {
-                    return response.json()
-                    addOutput.innerHTML = `Succesfully created the country ${name} with 
-                    a capital of ${capital}at Long: ${longitude} Lat: ${latitude}!`;
-                }
-                else {
-                    addOutput.innerHTML = `Adding error`;
-                }
-            })
+        .then((response) => {
+            if (response.status === 201) {
+                return response.json()
+                addOutput.innerHTML = `Succesfully created the country ${name} with 
+                a capital of ${capital}at Long: ${longitude} Lat: ${latitude}!`;
+            }
+            else {
+                addOutput.innerHTML = `Adding error`;
+            }
+        });
     })
 </script>
 </html>
