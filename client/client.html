@@ -181,19 +181,7 @@
         }
     }
 
-    document.getElementById('nameSubmit').addEventListener('click', async (e) => {
-        getHeadFun(e, 'nameSubmit', '/api/getCountryName', 'nameOutput');})
-
-    document.getElementById('locationSubmit').addEventListener('click', async (e) => {
-        getHeadFun(e, 'locationSubmit', '/api/getCountryLocation', 'locationOutput');})
-
-    document.getElementById('financeSubmit').addEventListener('click', async (e) => {
-        getHeadFun(e, 'financeSubmit', '/api/getCountryFinance', 'financeOutput');})
-
-    document.getElementById('allSubmit').addEventListener('click', async (e) => {
-        getHeadFun(e, 'allSubmit', '/api/getAllCountries', 'allOutput');})
-
-    document.getElementById('addSubmit').addEventListener('click', async (e) => {
+    async function addFun(e) {
         e.preventDefault();
         const endpoint = document.getElementById('addSubmit').closest('.endpoint');
         const url = '/api/addCountry';
@@ -217,16 +205,16 @@
             .then((response) => {
                 if (response.status === 201) {
                     addOutput.innerHTML = `Succesfully created the country ${body.name} with 
-                    a capital of ${body.capital}at Long: ${body.longitude} Lat: ${body.latitude}!`;
+            a capital of ${body.capital}at Long: ${body.longitude} Lat: ${body.latitude}!`;
                     return response.json()
                 }
                 else {
                     addOutput.innerHTML = `Adding error`;
                 }
-        });
-    })
+            });
+    }
 
-    document.getElementById('editSubmit').addEventListener('click', async (e) => {
+    async function editFun(e) {
         e.preventDefault();
         const endpoint = document.getElementById('editSubmit').closest('.endpoint');
         const url = '/api/editCapital';
@@ -249,13 +237,33 @@
             .then((response) => {
                 if (response.status === 200) {
                     editOutput.innerHTML = `Succesfully edited country capital 
-                    ${body.capital} to ${body.newCapital}!`;
+            ${body.capital} to ${body.newCapital}!`;
                     return response.json()
                 }
                 else {
                     editOutput.innerHTML = `Editing error`;
                 }
-        });
+            });
+    }
+
+    document.getElementById('nameSubmit').addEventListener('click', async (e) => {
+        getHeadFun(e, 'nameSubmit', '/api/getCountryName', 'nameOutput');})
+
+    document.getElementById('locationSubmit').addEventListener('click', async (e) => {
+        getHeadFun(e, 'locationSubmit', '/api/getCountryLocation', 'locationOutput');})
+
+    document.getElementById('financeSubmit').addEventListener('click', async (e) => {
+        getHeadFun(e, 'financeSubmit', '/api/getCountryFinance', 'financeOutput');})
+
+    document.getElementById('allSubmit').addEventListener('click', async (e) => {
+        getHeadFun(e, 'allSubmit', '/api/getAllCountries', 'allOutput');})
+
+    document.getElementById('addSubmit').addEventListener('click', async (e) => {
+        addFun(e);
+    })
+
+    document.getElementById('editSubmit').addEventListener('click', async (e) => {
+        
     })
 </script>
 </html>
