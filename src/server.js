@@ -145,7 +145,9 @@ const server = http.createServer((request, response) => {
                 const { name, capital, newCapital } = body;
 
                 const country = countries.find((c) => c.name.toLowerCase() === name.toLowerCase());
-                country.capital = String(body.capital);
+                console.log(body.capital);
+                country.capital = String(body.newCapital);
+                console.log(country.capital)
                 resJSON(response, 200, country);
             })
         }
