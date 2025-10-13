@@ -103,6 +103,8 @@
     </div>
 </body>
 <script>
+    import { getHeadFun, addFun, editFun } from '../src/utils.js'
+
     document.getElementById('nameSubmit').addEventListener('click', async (e) => {
         getHeadFun(e, 'nameSubmit', '/api/getCountryName', 'nameOutput');})
     document.getElementById('locationSubmit').addEventListener('click', async (e) => {
