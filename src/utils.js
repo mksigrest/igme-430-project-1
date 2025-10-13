@@ -2,7 +2,7 @@ nameSub = document.getElementById('nameSubmit');
 locSub = document.getElementById('locationSubmit');
 finSub = document.getElementById('financeSubmit');
 
-export async function getHeadFun(e, subType, urlBase, subOutput) {
+async function getHeadFun(e, subType, urlBase, subOutput) {
     e.preventDefault();
     const endpoint = document.getElementById(subType).closest('.endpoint');
 
@@ -76,7 +76,7 @@ export async function getHeadFun(e, subType, urlBase, subOutput) {
     }
 }
 
-export async function addFun(e) {
+async function addFun(e) {
     e.preventDefault();
     const endpoint = document.getElementById('addSubmit').closest('.endpoint');
     const url = '/api/addCountry';
@@ -109,7 +109,7 @@ export async function addFun(e) {
         });
 }
 
-export async function editFun(e) {
+async function editFun(e) {
     e.preventDefault();
     const endpoint = document.getElementById('editSubmit').closest('.endpoint');
     const url = '/api/editCapital';
