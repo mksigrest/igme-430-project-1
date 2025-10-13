@@ -248,22 +248,15 @@
 
     document.getElementById('nameSubmit').addEventListener('click', async (e) => {
         getHeadFun(e, 'nameSubmit', '/api/getCountryName', 'nameOutput');})
-
     document.getElementById('locationSubmit').addEventListener('click', async (e) => {
         getHeadFun(e, 'locationSubmit', '/api/getCountryLocation', 'locationOutput');})
-
     document.getElementById('financeSubmit').addEventListener('click', async (e) => {
         getHeadFun(e, 'financeSubmit', '/api/getCountryFinance', 'financeOutput');})
-
     document.getElementById('allSubmit').addEventListener('click', async (e) => {
         getHeadFun(e, 'allSubmit', '/api/getAllCountries', 'allOutput');})
-
     document.getElementById('addSubmit').addEventListener('click', async (e) => {
-        addFun(e);
-    })
-
+        addFun(e);})
     document.getElementById('editSubmit').addEventListener('click', async (e) => {
-        
-    })
+        editFun(e);})
 </script>
 </html>
