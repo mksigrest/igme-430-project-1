@@ -1,6 +1,7 @@
 {
   "name": "igme-430-project-1",
   "version": "1.0.0",
+  "type": "module",
   "description": "Igme 430 project 1 code",
   "main": "index.js",
   "scripts": {
