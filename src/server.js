@@ -1,8 +1,13 @@
+import http from 'http';
+import fs from 'fs';
+import url from 'url';
+import fs from 'fs';
+/*
 const http = require('http');
 const url = require('url');
 const path = require('path');
 const fs = require('fs');
-
+*/
 const style = path.join(__dirname, '..', 'client', 'client.css');
 const html = path.join(__dirname, '..', 'client', 'client.html');
 const json = path.join(__dirname, '..', 'jsonFile', 'countries.json');
