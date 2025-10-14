@@ -2,12 +2,12 @@ const http = require('http');
 const url = require('url');
 const path = require('path');
 const fs = require('fs');
+const func = require('./functions.js');
 
 const style = path.join(__dirname, '..', 'client', 'client.css');
 const html = path.join(__dirname, '..', 'client', 'client.html');
 const utils = path.join(__dirname, 'utils.js');
 const json = path.join(__dirname, '..', 'jsonFile', 'countries.json');
-const func = path.join(__dirname, 'function.js');
 
 const PORT = process.env.PORT || process.env.NODE_PORT || 3000;
 
@@ -43,13 +43,13 @@ const server = http.createServer((request, response) => {
         let results = countries.slice();
 
         if (pathName === '/api/getCountryName') {
-            func.getHeadReq(response, parsedUrl);
+            func.getHeadReq(response, parsedUrl, countries);
         }
         else if (pathName === '/api/getCountryLocation') {
-            func.getHeadReq(response, parsedUrl);
+            func.getHeadReq(response, parsedUrl, countries);
         }
         else if (pathName === '/api/getCountryFinance') {
-            func.getHeadReq(response, parsedUrl);
+            func.getHeadReq(response, parsedUrl, countries);
         }
         else if (pathName === '/api/getAllCountries') {
             func.resJSON(response, 200, results);
@@ -58,11 +58,11 @@ const server = http.createServer((request, response) => {
     
     else if (request.method === 'POST') {
         if (pathName === '/api/addCountry') {
-            func.addReq(response, request);
+            func.addReq(response, request, countries);
         }
         
         else if (pathName === '/api/editCapital') {
-            func.editReq(response, request);
+            func.editReq(response, request, countries);
         }
     }
     

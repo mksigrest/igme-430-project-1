@@ -18,7 +18,7 @@ const mainReq = (response, request, conType, fileType) => {
     }
 }
 
-const getHeadReq = (response, parsedUrl) => {
+const getHeadReq = (response, parsedUrl, countries) => {
     const { name, region, capital } = parsedUrl.query;
     const resultsF = countries.filter((c) => {
         let retFilt = true;
@@ -36,7 +36,7 @@ const getHeadReq = (response, parsedUrl) => {
     resJSON(response, 200, resultsF);
 }
 
-const addReq = (response, request) => {
+const addReq = (response, request, countries) => {
     let rawBody = '';
     request.on('data', chunk => {
         rawBody += chunk;
@@ -67,7 +67,7 @@ const addReq = (response, request) => {
     });
 }
 
-const editReq = (response, request) => {
+const editReq = (response, request, countries) => {
     let rawBody = '';
     request.on('data', chunk => {
         rawBody += chunk;
