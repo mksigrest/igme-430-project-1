@@ -10,37 +10,6 @@ const json = path.join(__dirname, '..', 'jsonFile', 'countries.json');
 
 const PORT = process.env.PORT || process.env.NODE_PORT || 3000;
 
-const resJSON = (response, statusCode, object) => {
-    response.writeHead(statusCode, { 'Content-Type': 'application/json' });
-    response.end(JSON.stringify(object));
-}
-
-const mainReq = (response, request, conType, fileType) => {
-    response.writeHead(200, { 'Content-Type': conType });
-
-    if (request.method === 'GET') {
-        response.end(fs.readFileSync(fileType));
-    }
-    else if (request.method === 'HEAD') {
-        response.end();
-    }
-}
-
-const getHeadReq = (response, q1, q2, parsedUrl) => {
-    const { q1, q2 } = parsedUrl.query;
-    const resultsF = countries.filter((c) => {
-        let retFilt = true;
-        if (region) {
-            retFilt = retFilt && c.q1 && c.q1.toLowerCase().includes(q1.toLowerCase().trim());
-        }
-        if (capital) {
-            retFilt = retFilt && c.q2 && c.q2.toLowerCase().includes(q2.toLowerCase().trim());
-        }
-        return retFilt
-    });
-    resJSON(response, 200, resultsF);
-}
-
 let countries = [];
 try {
     const rawJSON = fs.readFileSync(json, { encoding: 'utf8' });
@@ -73,48 +42,13 @@ const server = http.createServer((request, response) => {
         let results = countries.slice();
 
         if (pathName === '/api/getCountryName') {
-            getHeadReq(response, region, capital, parsedUrl);
-            /*
-            const { region, capital } = parsedUrl.query;
-            const resultsF = countries.filter((c) => {
-                let retFilt = true;
-                if (region) {
-                    retFilt = retFilt && c.region && c.region.toLowerCase().includes(region.toLowerCase().trim());
-                }
-                if (capital) {
-                    retFilt = retFilt && c.capital && c.capital.toLowerCase().includes(capital.toLowerCase().trim());
-                }
-                return retFilt
-            });
-            resJSON(response, 200, resultsF);*/
+            getHeadReq(response, parsedUrl);
         }
         else if (pathName === '/api/getCountryLocation') {
-            const { name, capital } = parsedUrl.query;
-            const resultsF = countries.filter((c) => {
-                let retFilt = true;
-                if (name) {
-                    retFilt = retFilt && c.name && c.name.toLowerCase().includes(name.toLowerCase().trim());
-                }
-                if (capital) {
-                    retFilt = retFilt && c.capital && c.capital.toLowerCase().includes(capital.toLowerCase().trim());
-                }
-                return retFilt
-            });
-            resJSON(response, 200, resultsF);
+            getHeadReq(response, parsedUrl);
         }
         else if (pathName === '/api/getCountryFinance') {
-            const { name, capital } = parsedUrl.query;
-            const resultsF = countries.filter((c) => {
-                let retFilt = true;
-                if (name) {
-                    retFilt = retFilt && c.name && c.name.toLowerCase().includes(name.toLowerCase().trim());
-                }
-                if (capital) {
-                    retFilt = retFilt && c.capital && c.capital.toLowerCase().includes(capital.toLowerCase().trim());
-                }
-                return retFilt
-            });
-            resJSON(response, 200, resultsF);
+            getHeadReq(response, parsedUrl);
         }
         else if (pathName === '/api/getAllCountries') {
             resJSON(response, 200, results);
@@ -123,55 +57,11 @@ const server = http.createServer((request, response) => {
     
     else if (request.method === 'POST') {
         if (pathName === '/api/addCountry') {
-            let rawBody = '';
-            request.on('data', chunk => {
-                rawBody += chunk;
-            });
-
-            request.on('end', () => {
-                console.log('Raw body: ', rawBody);
-                const body = JSON.parse(rawBody);
-                console.log('Parsed body: ', body);
-                const { name, capital } = body;
-                const nameE = countries.find((c) => c.name.toLowerCase() === String(name).toLowerCase());
-                const capitalE = countries.find((c) => c.capital.toLowerCase() === String(capital).toLowerCase());
-
-                if (nameE || capitalE) {
-                    resJSON(response, 400, 'Country/Capital already exists');
-                    return;
-                }
-
-                const newCountry = {
-                    name: String(body.name),
-                    capital: String(body.capital),
-                    longitude: body.longitude,
-                    latitude: body.latitude,
-                };
-
-                countries.push(newCountry);
-                resJSON(response, 201, newCountry);
-            });
+            addReq(response, request);
         }
         
         else if (pathName === '/api/editCapital') {
-            let rawBody = '';
-            request.on('data', chunk => {
-                rawBody += chunk;
-            })
-
-            request.on('end', () => {
-                const body = JSON.parse(rawBody);
-                const { name, capital, newCapital } = body;
-
-                let country = countries.find((c) => c.name.toLowerCase() === name.toLowerCase());
-                if (!country) {
-                    country = countries.find((c) => c.capital.toLowerCase() === capital.toLowerCase());
-                }
-                console.log(body.capital);
-                country.capital = String(body.newCapital);
-                console.log(country.capital)
-                resJSON(response, 200, country);
-            })
+            editReq(response, request);
         }
     }
     
