@@ -14,77 +14,51 @@
     <div class="content">
         <div class="endpoint">
             <h3>getCountryName</h3>
-            <label for="region">Region: </label>
-            <input class="regionField" type="text" />
-            <label for="capital">Capital: </label>
-            <input class="capitalField" type="text" />
-            <select id="nameMethodSelect">
-                <option value="get">GET</option>
-                <option value="head">HEAD</option>
-            </select>
-            <button id="nameSubmit">Get Country Name</button>
-        </div>
-        <div id="nameOutput">
+            <label>Region: (optional) - Region to filter by.</label><br />
+            <label>Capital: (optional) - Capital city to filter by.</label><br />
+            <label>Returns: List of country names filtered by above params.</label>
         </div>
         <br />
 
         <div class="endpoint">
             <h3>getCountryLocation</h3>
-            <label for="name">Name: </label>
-            <input class="nameField" type="text" />
-            <label for="capital">Capital: </label>
-            <input class="capitalField" type="text" />
-            <select id="locationMethodSelect">
-                <option value="get">GET</option>
-                <option value="head">HEAD</option>
-            </select>
-            <button id="locationSubmit">Get Country Location</button>
-        </div>
-        <div id="locationOutput">
+            <label>Name: (optional) - Country name to filter by.</label><br />
+            <label>Capital: (optional) - Capital city to filter by.</label><br />
+            <label>Returns: List of country names, latitudes, and longitudes filtered by above params.</label>
         </div>
         <br />
 
         <div class="endpoint">
             <h3>getCountryFinance</h3>
-            <label for="name">Name: </label>
-            <input class="nameField" type="text" />
-            <label for="capital">Capital: </label>
-            <input class="capitalField" type="text" />
-            <select id="financeMethodSelect">
-                <option value="get">GET</option>
-                <option value="head">HEAD</option>
-            </select>
-            <button id="financeSubmit">Get Country Finances</button>
-        </div>
-        <div id="financeOutput">
+            <label>Name: (optional) - Country name to filter by.</label><br />
+            <label>Capital: (optional) - Capital city to filter by.</label><br />
+            <label>Returns: List of country names, filtered by above params.</label>
         </div>
         <br />
 
         <div class="endpoint">
             <h3>getAllCountries</h3>
-            <select id="allMethodSelect">
-                <option value="get">GET</option>
-                <option value="head">HEAD</option>
-            </select>
-            <button id="allSubmit">Get All Countries</button>
-        </div>
-        <div id="allOutput">
+            <label>Returns: List of all country names, no filter.</label>
         </div>
         <br />
 
         <div class="endpoint">
             <h3>addCountry</h3>
-            <label for="name">Name: </label>
-            <input class="nameField" type="text" />
-            <label for="capital">Capital: </label>
-            <input class="capitalField" type="text" />
-            <label for="long">Longitude: </label>
-            <input class="longField" type="text" />
-            <label for="latit">Latitude: </label>
-            <input class="latitField" type="text" />
-            <button id="addSubmit">Add Country</button>
+            <label>Name: Country name to add.</label><br />
+            <label>Capital: Capital city to add.</label><br />
+            <label>Longitude: (optional) - Longitude to add.</label><br />
+            <label>Latitude: (optional) - Latitude to add.</label><br />
+            <label>Returns: Added country with params.</label>
         </div>
-        <div id="addOutput">
+        <br />
+
+        <div class="endpoint">
+            <h3>editCapital</h3>
+            <label>Name: Country name to add.</label><br />
+            <label>Capital: Capital city to add.</label><br />
+            <label>Longitude: (optional) - Longitude to add.</label><br />
+            <label>Latitude: (optional) - Latitude to add.</label><br />
+            <label>Returns: Added country with params.</label>
         </div>
         <br />
 

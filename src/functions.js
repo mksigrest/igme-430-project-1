@@ -120,7 +120,11 @@ const addReq = (response, request, countries, body) => {
     const capitalE = countries.find((c) => c.capital && c.capital.toLowerCase() === String(capital).toLowerCase());
     //if name or capital exists, resJSON error 400 badRequest
     if (nameE || capitalE) {
-        resJSON(response, 400, { error: 'Country/Capital already exists.', id: 'badRequest'});
+        resJSON(response, 400, { error: 'Country/Capital already exists.', id: 'badRequest' });
+        return;
+    }
+    else if (!name || !capital) {
+        resJSON(response, 400, { error: 'No Country/Capital inputted', id: 'badRequest' });
         return;
     }
     //sets newCountry to later pass into array
