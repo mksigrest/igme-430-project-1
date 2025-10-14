@@ -57,7 +57,7 @@ const server = http.createServer((request, response) => {
         response.writeHead(200, { 'Content-Type': 'application/javascript' });
 
         if (request.method === 'GET') {
-            response.end(fs.readFileSync(js));
+            response.end(fs.readFileSync(utils));
         }
         else if (request.method === 'HEAD') {
             response.end();
