@@ -33,7 +33,7 @@ const parseBody = (response, request, countries, callBack) => {
 const mainReq = (response, request, conType, fileType) => {
     const data = fs.readFileSync(fileType);
     if (request.method === 'GET') {
-        response.writeHead(200, { 'Content-Type': conType, 'Content-Length': Buffer.byteLength() });
+        response.writeHead(200, { 'Content-Type': conType, 'Content-Length': Buffer.byteLength(data) });
         response.end(data);
     }
     else if (request.method === 'HEAD') {
