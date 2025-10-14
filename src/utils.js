@@ -3,10 +3,11 @@ nameSub = document.getElementById('nameSubmit');
 locSub = document.getElementById('locationSubmit');
 finSub = document.getElementById('financeSubmit');
 //function for all GET and HEAD requests
-async function getHeadFun(e, subType, urlBase, subOutput) {
+async function getHeadFun(e, subType, urlBase, subOutput, subSelect) {
     e.preventDefault();
     const endpoint = document.getElementById(subType).closest('.endpoint');
     const funOutput = document.getElementById(subOutput);
+    const funSelect = document.getElementById(subSelect);
     //accepts params from name, being capital and reigon
     const params = new URLSearchParams();
     if (subType === 'nameSubmit') {
@@ -154,16 +155,16 @@ async function editFun(e) {
 }
 //if submit button pressed, call respective function passing correct parameters
 document.getElementById('nameSubmit').addEventListener('click', async (e) => {
-    getHeadFun(e, 'nameSubmit', '/api/getCountryName', 'nameOutput');
+    getHeadFun(e, 'nameSubmit', '/api/getCountryName', 'nameOutput', 'nameMethodSelect');
 })
 document.getElementById('locationSubmit').addEventListener('click', async (e) => {
-    getHeadFun(e, 'locationSubmit', '/api/getCountryLocation', 'locationOutput');
+    getHeadFun(e, 'locationSubmit', '/api/getCountryLocation', 'locationOutput', 'locationMethodSelect');
 })
 document.getElementById('financeSubmit').addEventListener('click', async (e) => {
-    getHeadFun(e, 'financeSubmit', '/api/getCountryFinance', 'financeOutput');
+    getHeadFun(e, 'financeSubmit', '/api/getCountryFinance', 'financeOutput', 'financeMethodSelect');
 })
 document.getElementById('allSubmit').addEventListener('click', async (e) => {
-    getHeadFun(e, 'allSubmit', '/api/getAllCountries', 'allOutput');
+    getHeadFun(e, 'allSubmit', '/api/getAllCountries', 'allOutput', 'allMethodSelect');
 })
 document.getElementById('addSubmit').addEventListener('click', async (e) => {
     addFun(e);
