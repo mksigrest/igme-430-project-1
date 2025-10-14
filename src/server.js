@@ -44,37 +44,14 @@ const server = http.createServer((request, response) => {
 
     if ((request.method === 'GET' || request.method === 'HEAD') && (pathName === '/' || pathName === '/client.html')) {
         mainReq(response, request, 'text/html', html);
-        /*
-        response.writeHead(200, { 'Content-Type': 'text/html' });
-
-        if (request.method === 'GET') {
-            response.end(fs.readFileSync(html));
-        }
-        else if (request.method === 'HEAD') {
-            response.end();
-        }*/
     }
 
     else if ((request.method === 'GET' || request.method === 'HEAD') && (pathName === '/client.css')) {
-        response.writeHead(200, { 'Content-Type': 'text/css' });
-
-        if (request.method === 'GET') {
-            response.end(fs.readFileSync(style));
-        }
-        else if (request.method === 'HEAD') {
-            response.end();
-        }
+        mainReq(response, request, 'text/css', style);
     }
 
     else if ((request.method === 'GET' || request.method === 'HEAD') && (pathName === '/utils.js')) {
-        response.writeHead(200, { 'Content-Type': 'application/javascript' });
-
-        if (request.method === 'GET') {
-            response.end(fs.readFileSync(utils));
-        }
-        else if (request.method === 'HEAD') {
-            response.end();
-        }
+        mainReq(response, request, 'application/javascript', utils);
     }
 
     else if (request.method === 'GET' || request.method === 'HEAD') {
