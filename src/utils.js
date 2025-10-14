@@ -2,6 +2,7 @@
 nameSub = document.getElementById('nameSubmit');
 locSub = document.getElementById('locationSubmit');
 finSub = document.getElementById('financeSubmit');
+const funOutput = document.getElementById(subOutput);
 //function for all GET and HEAD requests
 async function getHeadFun(e, subType, urlBase, subOutput) {
     e.preventDefault();
@@ -25,7 +26,6 @@ async function getHeadFun(e, subType, urlBase, subOutput) {
     const url = urlBase + (params.toString() ? `?${params.toString()}` : '');
     const method = document.getElementById('nameMethodSelect').value.toUpperCase();
     const response = await fetch(url, { method });
-    const funOutput = document.getElementById(subOutput);
     //if method, then post body
     if (method !== 'HEAD') {
         if (response.ok) {
@@ -68,18 +68,18 @@ async function getHeadFun(e, subType, urlBase, subOutput) {
         //if failure post message
         else {
             const error = response.json();
-            nameOutput.innerHTML = `<strong>Not Found</strong> <br> <br> Message: ${error.message}`;
+            funOutput.innerHTML = `<strong>Not Found</strong> <br> <br> Message: ${error.message}`;
             console.log(error);
         }
     }
     //if not GET, then just post success
     else {
         if (response.ok) {
-            nameOutput.innerHTML = `<strong>Success</strong>`
+            funOutput.innerHTML = `<strong>Success</strong>`
         }
         //if failure post nothing
         else {
-            nameOutput.innerHTML = `<strong>Not Found</strong>`
+            funOutput.innerHTML = `<strong>Not Found</strong>`
         }
     }
 }
