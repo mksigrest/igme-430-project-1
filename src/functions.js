@@ -70,6 +70,24 @@ const getHeadReq = (response, request, parsedUrl, countries) => {
         response.end();
     }
 }
+//function returns all countries in list
+const allReq = (response, request, countries) => {
+    if (request.method === 'GET') {
+        const body = JSON.stringify(countries);
+        response.writeHead(200, {
+            'Content-Type': 'application/json',
+            'Content-Length': Buffer.byteLength(body)
+        });
+        response.end(body);
+    }
+    else {
+        response.writeHead(204, {
+            'Content-Type': 'application/json',
+            'Content-Length': 0
+        });
+        response.end();
+    }
+}
 //function for add POST endpoint
 const addReq = (response, request, countries, body) => {
     const { name, capital } = body;
@@ -96,7 +114,7 @@ const editReq = (response, request, countries, body) => {
     const { name, capital, newCapital } = body;
     //finds country based of name or capital exist, as well as inputtable newCapital
     let country;
-    if (name) { countries.find((c) => c.name.toLowerCase() === name.toLowerCase());}
+    if (name) { country = countries.find((c) => c.name.toLowerCase() === name.toLowerCase());}
     if (!country && capital) {country = countries.find((c) => c.capital.toLowerCase() === capital.toLowerCase());}
     if (!country) {
         resJSON(response, 404, { error: 'Country not found.', id:'notFound' });
@@ -108,4 +126,4 @@ const editReq = (response, request, countries, body) => {
     resJSON(response, 200, country);
 }
 //exports all modules to server.js
-module.exports = { resJSON, parseBody, mainReq, getHeadReq, addReq, editReq };
+module.exports = { resJSON, parseBody, mainReq, getHeadReq, allReq, addReq, editReq };

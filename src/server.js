@@ -56,7 +56,7 @@ const server = http.createServer((request, response) => {
         }
         //returns all countries as .json format
         else if (pathName === '/api/getAllCountries') {
-            func.resJSON(response, 200, results);
+            func.allReq(response, request, countries);
         }
         //returns error 404 if not found
         else {

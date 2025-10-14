@@ -59,9 +59,13 @@ async function getHeadFun(e, subType, urlBase, subOutput, subSelect) {
                 }).join('');
                 funOutput.innerHTML = `<strong>Found ${data.length}</strong><ul>${list}</ul>`;
             }
-            //else pressed, display full .json code
+            //else pressed, display full all countries
             else {
-                funOutput.innerHTML = `<strong>Success</strong> <br> <br> ${JSON.stringify(data)}`;
+                const list = data.map(c => {
+                    const displayName = (c.name && (c.name.common || c.name))
+                    return `<li><strong>${displayName}</strong></li>`;
+                }).join('');
+                funOutput.innerHTML = `<strong>Found ${data.length}</strong><ul>${list}</ul>`;
             }
 
             console.log(data);
