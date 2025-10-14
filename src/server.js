@@ -144,7 +144,10 @@ const server = http.createServer((request, response) => {
                 const body = JSON.parse(rawBody);
                 const { name, capital, newCapital } = body;
 
-                const country = countries.find((c) => c.name.toLowerCase() === name.toLowerCase());
+                let country = countries.find((c) => c.name.toLowerCase() === name.toLowerCase());
+                if (!country) {
+                    country = countries.find((c) => c.capital.toLowerCase() === capital.toLowerCase());
+                }
                 console.log(body.capital);
                 country.capital = String(body.newCapital);
                 console.log(country.capital)
