@@ -97,8 +97,8 @@ const allReq = (response, request, countries) => {
 //function for add POST endpoint
 const addReq = (response, request, countries, body) => {
     const { name, capital } = body;
-    const nameE = countries.find((c) => c.name.toLowerCase() === String(name).toLowerCase());
-    const capitalE = countries.find((c) => c.capital.toLowerCase() === String(capital).toLowerCase());
+    const nameE = countries.find((c) => c.name && c.name.toLowerCase() === String(name).toLowerCase());
+    const capitalE = countries.find((c) => c.capital && c.capital.toLowerCase() === String(capital).toLowerCase());
     //if name or capital exists, resJSON error 400 badRequest
     if (nameE || capitalE) {
         resJSON(response, 400, { error: 'Country/Capital already exists.', id: 'badRequest'});
