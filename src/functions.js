@@ -67,7 +67,7 @@ const getHeadReq = (response, request, parsedUrl, countries) => {
                 'Content-Type': 'application/json',
                 'Content-Length': Buffer.byteLength(errBody),
             });
-            response.end(errBody);
+            response.end(err);
         }
         else {
             const body = JSON.stringify(resultsF);
