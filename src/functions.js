@@ -9,12 +9,13 @@ const resJSON = (response, statusCode, object) => {
 }
 
 const mainReq = (response, request, conType, fileType) => {
+    const data = JSON.stringify(fileType);
     if (request.method === 'GET') {
-        response.writeHead(200, { 'Content-Type': conType });
-        response.end(fs.readFileSync(fileType));
+        response.writeHead(200, { 'Content-Type': conType, 'Content-Length': Buffer.byteLength() });
+        response.end(data);
     }
     else if (request.method === 'HEAD') {
-        response.writeHead(204, { 'Content-Type': conType });
+        response.writeHead(204, { 'Content-Type': conType, 'Content-Length': 0 });
         response.end();
     }
 }
