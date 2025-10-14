@@ -26,7 +26,7 @@ const parseBody = (response, request, countries, callBack) => {
             body = {};
         }
 
-        callBack(response, request, countries, body);
+        callBack(body);
     })
 }
 
@@ -57,7 +57,7 @@ const getHeadReq = (response, request, parsedUrl, countries) => {
             'Content-Type': 'application/json',
             'Content-Length': Buffer.byteLength(body)
         });
-        response.end();
+        response.end(body);
     }
     else {
         response.writeHead(204, {
@@ -66,7 +66,6 @@ const getHeadReq = (response, request, parsedUrl, countries) => {
         });
         response.end();
     }
-    resJSON(response, 200, resultsF);
 }
 
 const addReq = (response, request, countries, body) => {
@@ -75,7 +74,7 @@ const addReq = (response, request, countries, body) => {
     const capitalE = countries.find((c) => c.capital.toLowerCase() === String(capital).toLowerCase());
 
     if (nameE || capitalE) {
-        resJSON(response, 400, 'Country/Capital already exists');
+        resJSON(response, 400, { error: 'Country/Capital already exists.', id: 'badRequest'});
         return;
     }
 
@@ -93,8 +92,13 @@ const addReq = (response, request, countries, body) => {
 const editReq = (response, request, countries, body) => {
     const { name, capital, newCapital } = body;
 
-    let country = countries.find((c) => c.name.toLowerCase() === name.toLowerCase());
-    if (!country) {country = countries.find((c) => c.capital.toLowerCase() === capital.toLowerCase());}
+    let country;
+    if (name) { countries.find((c) => c.name.toLowerCase() === name.toLowerCase());}
+    if (!country && capital) {country = countries.find((c) => c.capital.toLowerCase() === capital.toLowerCase());}
+    if (!country) {
+        resJSON(response, 404, { error: 'Country not found.', id:'notFound' });
+        return;
+    }
         
     country.capital = String(body.newCapital);
         
