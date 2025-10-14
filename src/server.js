@@ -5,6 +5,7 @@ const fs = require('fs');
 
 const style = path.join(__dirname, '..', 'client', 'client.css');
 const html = path.join(__dirname, '..', 'client', 'client.html');
+const utils = path.join(__dirname, '..', 'client', 'utils.js');
 const json = path.join(__dirname, '..', 'jsonFile', 'countries.json');
 
 const PORT = process.env.PORT || process.env.NODE_PORT || 3000;
@@ -49,6 +50,17 @@ const server = http.createServer((request, response) => {
         }
         else if (request.method === 'HEAD') {
             response.end();
+        }
+    }
+
+    else if ((request.method === 'GET' || request.method === 'HEAD') && (pathName === '/utils.js')) {
+        response.writeHead(200, { 'Content-Type': 'application/javascript' });
+
+        if (request.method === 'GET') {
+            response.end(fs.readFileSync(js));
+        }
+        else if (request.method === 'HEAD') {
+            response.end():
         }
     }
 
