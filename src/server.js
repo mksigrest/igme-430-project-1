@@ -7,6 +7,7 @@ const style = path.join(__dirname, '..', 'client', 'client.css');
 const html = path.join(__dirname, '..', 'client', 'client.html');
 const utils = path.join(__dirname, 'utils.js');
 const json = path.join(__dirname, '..', 'jsonFile', 'countries.json');
+const func = path.join(__dirname, 'function.js');
 
 const PORT = process.env.PORT || process.env.NODE_PORT || 3000;
 
@@ -27,46 +28,46 @@ const server = http.createServer((request, response) => {
     const pathName = parsedUrl.pathname;
 
     if ((request.method === 'GET' || request.method === 'HEAD') && (pathName === '/' || pathName === '/client.html')) {
-        mainReq(response, request, 'text/html', html);
+        func.mainReq(response, request, 'text/html', html);
     }
 
     else if ((request.method === 'GET' || request.method === 'HEAD') && (pathName === '/client.css')) {
-        mainReq(response, request, 'text/css', style);
+        func.mainReq(response, request, 'text/css', style);
     }
 
     else if ((request.method === 'GET' || request.method === 'HEAD') && (pathName === '/utils.js')) {
-        mainReq(response, request, 'application/javascript', utils);
+        func.mainReq(response, request, 'application/javascript', utils);
     }
 
     else if (request.method === 'GET' || request.method === 'HEAD') {
         let results = countries.slice();
 
         if (pathName === '/api/getCountryName') {
-            getHeadReq(response, parsedUrl);
+            func.getHeadReq(response, parsedUrl);
         }
         else if (pathName === '/api/getCountryLocation') {
-            getHeadReq(response, parsedUrl);
+            func.getHeadReq(response, parsedUrl);
         }
         else if (pathName === '/api/getCountryFinance') {
-            getHeadReq(response, parsedUrl);
+            func.getHeadReq(response, parsedUrl);
         }
         else if (pathName === '/api/getAllCountries') {
-            resJSON(response, 200, results);
+            func.resJSON(response, 200, results);
         }
     }
     
     else if (request.method === 'POST') {
         if (pathName === '/api/addCountry') {
-            addReq(response, request);
+            func.addReq(response, request);
         }
         
         else if (pathName === '/api/editCapital') {
-            editReq(response, request);
+            func.editReq(response, request);
         }
     }
     
     else {
-        resJSON(response, 404, { message: 'The page you are looking for was not found.', id: 'notFound' });
+        func.resJSON(response, 404, { message: 'The page you are looking for was not found.', id: 'notFound' });
     }
 });
 

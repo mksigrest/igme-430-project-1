@@ -1,12 +1,6 @@
 const http = require('http');
 const url = require('url');
-const path = require('path');
 const fs = require('fs');
-
-const style = path.join(__dirname, '..', 'client', 'client.css');
-const html = path.join(__dirname, '..', 'client', 'client.html');
-const utils = path.join(__dirname, 'utils.js');
-const json = path.join(__dirname, '..', 'jsonFile', 'countries.json');
 
 const resJSON = (response, statusCode, object) => {
     response.writeHead(statusCode, { 'Content-Type': 'application/json' });
