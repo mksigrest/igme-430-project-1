@@ -58,6 +58,10 @@ const server = http.createServer((request, response) => {
         else if (pathName === '/api/getAllCountries') {
             func.resJSON(response, 200, results);
         }
+        //returns error 404 if not found
+        else {
+            func.resJSON(response, 404, { message: 'The page you are looking for was not found.', id: 'notFound' });
+        }
     }
     //specific pathing for POST
     else if (request.method === 'POST') {
