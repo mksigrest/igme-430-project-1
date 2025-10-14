@@ -93,6 +93,7 @@ async function addFun(e) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Content-Length': 0,
             'Accept': 'application/json'
         },
         body: JSON.stringify(body),
@@ -125,6 +126,7 @@ async function editFun(e) {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Content-Length': 0,
             'Accept': 'application/json'
         },
         body: JSON.stringify(body),

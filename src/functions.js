@@ -22,17 +22,17 @@ const getHeadReq = (response, parsedUrl, countries) => {
     const { name, region, capital } = parsedUrl.query;
     const resultsF = countries.filter((c) => {
         let retFilt = true;
-        if (name) {
-            retFilt = retFilt && c.name && c.name.toLowerCase().includes(name.toLowerCase().trim());
-        }
-        if (region) {
-            retFilt = retFilt && c.region && c.region.toLowerCase().includes(region.toLowerCase().trim());
-        }
-        if (capital) {
-            retFilt = retFilt && c.capital && c.capital.toLowerCase().includes(capital.toLowerCase().trim());
-        }
+        if (name) {retFilt = retFilt && c.name && c.name.toLowerCase().includes(name.toLowerCase().trim());}
+        if (region) {retFilt = retFilt && c.region && c.region.toLowerCase().includes(region.toLowerCase().trim());}
+        if (capital) {retFilt = retFilt && c.capital && c.capital.toLowerCase().includes(capital.toLowerCase().trim());}
         return retFilt
     });
+    if (request.method === 'GET') {
+        response.writeHead(204, {
+            'Content-Type': 'application/json',
+            'Content-Length': 0
+        });
+    }
     resJSON(response, 200, resultsF);
 }
 
