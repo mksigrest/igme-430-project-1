@@ -26,7 +26,6 @@ async function getHeadFun(e, subType, urlBase, subOutput, subSelect) {
     //concatinates full url with params, determines method, gets response, and determines output in .html
     const url = urlBase + (params.toString() ? `?${params.toString()}` : '');
     const method = funSelect.value.toUpperCase();
-    const response = await fetch(url, { method });
     //added Accept header for HEAD and Get
     const fetchOpt = { method, headers: { Accept: 'application/json' } };
     const response = await fetch(url, fetchOpt);
