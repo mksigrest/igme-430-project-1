@@ -15,7 +15,7 @@ const resJSON = (response, statusCode, object) => {
     response.end(JSON.stringify(object));
 }
 
-const mainReq = (conType, fileType) => {
+const mainReq = (response, conType, fileType) => {
     response.writeHead(200, { 'Content-Type': conType });
 
     if (request.method === 'GET') {
@@ -43,7 +43,7 @@ const server = http.createServer((request, response) => {
     const pathName = parsedUrl.pathname;
 
     if ((request.method === 'GET' || request.method === 'HEAD') && (pathName === '/' || pathName === '/client.html')) {
-        mainReq('text/html', html);
+        mainReq(response, 'text/html', html);
         /*
         response.writeHead(200, { 'Content-Type': 'text/html' });
 
