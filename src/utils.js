@@ -25,7 +25,7 @@ async function getHeadFun(e, subType, urlBase, subOutput, subSelect) {
     }
     //concatinates full url with params, determines method, gets response, and determines output in .html
     const url = urlBase + (params.toString() ? `?${params.toString()}` : '');
-    const method = document.getElementById(funSelect).value.toUpperCase();
+    const method = funSelect.value.toUpperCase();
     const response = await fetch(url, { method });
     //if method, then post body
     if (method !== 'HEAD') {
