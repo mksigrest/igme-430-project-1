@@ -17,7 +17,13 @@ const parseBody = (response, request, countries, callBack) => {
         let body;
         //if json format, parse body
         if (contentType.includes('application/json')) {
-            body = JSON.parse(rawBody);
+            try {
+                body = JSON.parse(rawBody || '{}');
+            }
+            catch (err) {
+                resJSON(response, 400, { error: 'Invalid JSON', id: 'badRequest' });
+                return;
+            }
         }
         //if www-urlencoded, use params into body
         else if (contentType.includes('application/x-www-form-urlencoded')) {
