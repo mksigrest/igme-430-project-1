@@ -26,6 +26,21 @@ const mainReq = (response, request, conType, fileType) => {
     }
 }
 
+const getHeadReq = (response, request, q1, q2) => {
+    const { q1, q2 } = parsedUrl.query;
+    const resultsF = countries.filter((c) => {
+        let retFilt = true;
+        if (region) {
+            retFilt = retFilt && c.q1 && c.q1.toLowerCase().includes(q1.toLowerCase().trim());
+        }
+        if (capital) {
+            retFilt = retFilt && c.q2 && c.q2.toLowerCase().includes(q2.toLowerCase().trim());
+        }
+        return retFilt
+    });
+    resJSON(response, 200, resultsF);
+}
+
 let countries = [];
 try {
     const rawJSON = fs.readFileSync(json, { encoding: 'utf8' });
