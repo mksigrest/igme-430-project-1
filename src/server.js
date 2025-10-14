@@ -31,17 +31,21 @@ const server = http.createServer((request, response) => {
     //If base path, load main page
     if ((request.method === 'GET' || request.method === 'HEAD') && (pathName === '/' || pathName === '/client.html')) {
         func.mainReq(response, request, 'text/html', html);
+        return;
     }
     if ((request.method === 'GET' || request.method === 'HEAD') && (pathName === '/documentation.html')) {
         func.mainReq(response, request, 'text/html', docu);
+        return;
     }
     //loads .css file
     else if ((request.method === 'GET' || request.method === 'HEAD') && (pathName === '/client.css')) {
         func.mainReq(response, request, 'text/css', style);
+        return;
     }
     //loads .html script file utils
     else if ((request.method === 'GET' || request.method === 'HEAD') && (pathName === '/utils.js')) {
         func.mainReq(response, request, 'application/javascript', utils);
+        return;
     }
     //specific path or GET and HEAD requests
     else if (request.method === 'GET' || request.method === 'HEAD') {
@@ -49,18 +53,22 @@ const server = http.createServer((request, response) => {
         //returns name from either reigon or capital
         if (pathName === '/api/getCountryName') {
             func.getHeadReq(response, request, parsedUrl, countries);
+            return;
         }
         //returns country location
         else if (pathName === '/api/getCountryLocation') {
             func.getHeadReq(response, request, parsedUrl, countries);
+            return;
         }
         //returns country financial information
         else if (pathName === '/api/getCountryFinance') {
             func.getHeadReq(response, request, parsedUrl, countries);
+            return;
         }
         //returns all countries as .json format
         else if (pathName === '/api/getAllCountries') {
             func.allReq(response, request, countries);
+            return;
         }
         //returns error 404 if not found
         else {
@@ -74,12 +82,14 @@ const server = http.createServer((request, response) => {
             func.parseBody(response, request, countries, (body) => {
                 func.addReq(response, request, countries, body);
             })
+            return;
         }
         //pathing for editing a capital for a country
         else if (pathName === '/api/editCapital') {
             func.parseBody(response, request, countries, (body) => {
                 func.editReq(response, request, countries, body);
             })
+            return;
         }
     }
     //returns error 404 if not found
