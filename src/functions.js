@@ -8,6 +8,19 @@ const resJSON = (response, statusCode, object) => {
     response.end(body);
 }
 
+const parseBody = (request, callBack) => {
+    let rawBody = '';
+    request.on('data', chunk => { rawBody += chunk; });
+    request.on('end', () => {
+        const contentType = request.headers['content-type'] || '';
+        let body;
+
+        if (contentType.includes('application/json')) {
+            body = JSON.parse(rawBody);
+        }
+    })
+}
+
 const mainReq = (response, request, conType, fileType) => {
     const data = JSON.stringify(fileType);
     if (request.method === 'GET') {
@@ -52,9 +65,8 @@ const addReq = (response, request, countries) => {
     request.on('data', chunk => {rawBody += chunk;});
 
     request.on('end', () => {
-        console.log('Raw body: ', rawBody);
         const body = JSON.parse(rawBody);
-        console.log('Parsed body: ', body);
+        
         const { name, capital } = body;
         const nameE = countries.find((c) => c.name.toLowerCase() === String(name).toLowerCase());
         const capitalE = countries.find((c) => c.capital.toLowerCase() === String(capital).toLowerCase());
@@ -85,12 +97,10 @@ const editReq = (response, request, countries) => {
         const { name, capital, newCapital } = body;
 
         let country = countries.find((c) => c.name.toLowerCase() === name.toLowerCase());
-        if (!country) {
-            country = countries.find((c) => c.capital.toLowerCase() === capital.toLowerCase());
-        }
-        console.log(body.capital);
+        if (!country) {country = countries.find((c) => c.capital.toLowerCase() === capital.toLowerCase());}
+        
         country.capital = String(body.newCapital);
-        console.log(country.capital)
+        
         resJSON(response, 200, country);
     })
 }
