@@ -15,7 +15,7 @@ const resJSON = (response, statusCode, object) => {
     response.end(JSON.stringify(object));
 }
 
-const mainReq = (conType, fileType) {
+const mainReq = (conType, fileType) => {
     response.writeHead(200, { 'Content-Type': conType });
 
     if (request.method === 'GET') {
