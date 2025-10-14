@@ -31,7 +31,7 @@ const parseBody = (response, request, countries, callBack) => {
 }
 
 const mainReq = (response, request, conType, fileType) => {
-    const data = JSON.stringify(fileType);
+    const data = fs.readFileSync(fileType);
     if (request.method === 'GET') {
         response.writeHead(200, { 'Content-Type': conType, 'Content-Length': Buffer.byteLength() });
         response.end(data);
@@ -52,17 +52,17 @@ const getHeadReq = (response, request, parsedUrl, countries) => {
         return retFilt
     });
     if (request.method === 'GET') {
-        response.writeHead(204, {
-            'Content-Type': 'application/json',
-            'Content-Length': 0
-        });
-        response.end();
-    }
-    else {
         const body = JSON.stringify(resultsF);
         response.writeHead(200, {
             'Content-Type': 'application/json',
             'Content-Length': Buffer.byteLength(body)
+        });
+        response.end();
+    }
+    else {
+        response.writeHead(204, {
+            'Content-Type': 'application/json',
+            'Content-Length': 0
         });
         response.end();
     }

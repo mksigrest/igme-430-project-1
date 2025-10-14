@@ -9,6 +9,15 @@ const html = path.join(__dirname, '..', 'client', 'client.html');
 const utils = path.join(__dirname, 'utils.js');
 const json = path.join(__dirname, '..', 'jsonFile', 'countries.json');
 
+console.log('Resolved paths:');
+console.log('HTML:', html);
+console.log('CSS:', style);
+console.log('UTILS:', utils);
+
+console.log('HTML exists:', fs.existsSync(html));
+console.log('CSS exists:', fs.existsSync(style));
+console.log('UTILS exists:', fs.existsSync(utils));
+
 const PORT = process.env.PORT || process.env.NODE_PORT || 3000;
 
 let countries = [];
