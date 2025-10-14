@@ -49,9 +49,7 @@ const getHeadReq = (response, request, parsedUrl, countries) => {
 
 const addReq = (response, request, countries) => {
     let rawBody = '';
-    request.on('data', chunk => {
-        rawBody += chunk;
-    });
+    request.on('data', chunk => {rawBody += chunk;});
 
     request.on('end', () => {
         console.log('Raw body: ', rawBody);
@@ -80,9 +78,7 @@ const addReq = (response, request, countries) => {
 
 const editReq = (response, request, countries) => {
     let rawBody = '';
-    request.on('data', chunk => {
-        rawBody += chunk;
-    })
+    request.on('data', chunk => {rawBody += chunk;})
 
     request.on('end', () => {
         const body = JSON.parse(rawBody);
