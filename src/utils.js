@@ -105,7 +105,7 @@ async function addFun(e) {
         latitude: endpoint.querySelector('.latitField').value.trim(),
     }
     //determines response with headers, and body that is turned into string
-    const response = fetch(url, {
+    const response = await fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -115,16 +115,13 @@ async function addFun(e) {
         body: JSON.stringify(body),
     })
     //determines output from status code
-        .then((response) => {
-            if (response.status === 201) {
-                addOutput.innerHTML = `Succesfully created the country ${body.name} with 
-                a capital of ${body.capital} at Long: ${body.longitude} Lat: ${body.latitude}!`;
-                return response.json()
-            }
-            else {
-                addOutput.innerHTML = `Adding error`;
-            }
-        });
+    if (response.status === 201) {
+        addOutput.innerHTML = `Succesfully created the country ${body.name} with 
+        a capital of ${body.capital} at Long: ${body.longitude} Lat: ${body.latitude}!`;
+    }
+    else {
+        addOutput.innerHTML = `Adding error`;
+    }
 }
 //function for second POST endpoint edit
 async function editFun(e) {
@@ -139,7 +136,7 @@ async function editFun(e) {
         newCapital: endpoint.querySelector('.newCapitalField').value.trim(),
     }
     //determines response with headers, and body stringified
-    const response = fetch(url, {
+    const response = await fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -149,16 +146,14 @@ async function editFun(e) {
         body: JSON.stringify(body),
     })
     //determines output based off of status code passed
-        .then((response) => {
-            if (response.status === 200) {
-                editOutput.innerHTML = `Succesfully edited country capital 
+    if (response.status === 200) {
+        editOutput.innerHTML = `Succesfully edited country capital 
                 ${body.capital} to ${body.newCapital}!`;
-                return response.json()
-            }
-            else {
-                editOutput.innerHTML = `Editing error`;
-            }
-        });
+        return response.json()
+    }
+    else {
+        editOutput.innerHTML = `Editing error`;
+    }
 }
 //if submit button pressed, call respective function passing correct parameters
 document.getElementById('nameSubmit').addEventListener('click', async (e) => {
