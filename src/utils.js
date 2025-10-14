@@ -2,11 +2,11 @@
 nameSub = document.getElementById('nameSubmit');
 locSub = document.getElementById('locationSubmit');
 finSub = document.getElementById('financeSubmit');
-const funOutput = document.getElementById(subOutput);
 //function for all GET and HEAD requests
 async function getHeadFun(e, subType, urlBase, subOutput) {
     e.preventDefault();
     const endpoint = document.getElementById(subType).closest('.endpoint');
+    const funOutput = document.getElementById(subOutput);
     //accepts params from name, being capital and reigon
     const params = new URLSearchParams();
     if (subType === 'nameSubmit') {
