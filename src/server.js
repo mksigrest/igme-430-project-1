@@ -9,6 +9,7 @@ const style = path.join(__dirname, '..', 'client', 'client.css');
 const html = path.join(__dirname, '..', 'client', 'client.html');
 const utils = path.join(__dirname, 'utils.js');
 const json = path.join(__dirname, '..', 'jsonFile', 'countries.json');
+const docu = path.join(__dirname, '..', 'client', 'documentation.html');
 //Port to run through
 const PORT = process.env.PORT || process.env.NODE_PORT || 3000;
 //loads .json from startup into countries array
@@ -30,6 +31,9 @@ const server = http.createServer((request, response) => {
     //If base path, load main page
     if ((request.method === 'GET' || request.method === 'HEAD') && (pathName === '/' || pathName === '/client.html')) {
         func.mainReq(response, request, 'text/html', html);
+    }
+    if ((request.method === 'GET' || request.method === 'HEAD') && (pathName === '/documentation.html')) {
+        func.mainReq(response, request, 'text/html', docu);
     }
     //loads .css file
     else if ((request.method === 'GET' || request.method === 'HEAD') && (pathName === '/client.css')) {
