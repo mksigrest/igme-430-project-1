@@ -8,12 +8,12 @@ const resJSON = (response, statusCode, object) => {
 }
 
 const mainReq = (response, request, conType, fileType) => {
-    response.writeHead(200, { 'Content-Type': conType });
-
     if (request.method === 'GET') {
+        response.writeHead(200, { 'Content-Type': conType });
         response.end(fs.readFileSync(fileType));
     }
     else if (request.method === 'HEAD') {
+        response.writeHead(204, { 'Content-Type': conType });
         response.end();
     }
 }
