@@ -82,7 +82,7 @@ const getHeadReq = (response, request, parsedUrl, countries) => {
         if (resultsF.length === 0) {
             response.writeHead(404, {
                 'Content-Type': 'application/json',
-                'Content-Length': Buffer.byteLength(errBody),
+                'Content-Length': Buffer.byteLength(err),
             });
             response.end();
         }
