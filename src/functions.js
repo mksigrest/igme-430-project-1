@@ -18,6 +18,13 @@ const parseBody = (request, callBack) => {
         if (contentType.includes('application/json')) {
             body = JSON.parse(rawBody);
         }
+        else if (contentType.includes('application/x-www-form-urlencoded')) {
+            const params = new URLSearchParams(rawBody);
+            body = Object.fromEntries(params);
+        }
+        else {
+            body = {};
+        }
     })
 }
 
