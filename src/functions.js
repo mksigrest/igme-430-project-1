@@ -3,8 +3,9 @@ const url = require('url');
 const fs = require('fs');
 
 const resJSON = (response, statusCode, object) => {
-    response.writeHead(statusCode, { 'Content-Type': 'application/json' });
-    response.end(JSON.stringify(object));
+    const body = JSON.stringify(object);
+    response.writeHead(statusCode, { 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) });
+    response.end(body);
 }
 
 const mainReq = (response, request, conType, fileType) => {
