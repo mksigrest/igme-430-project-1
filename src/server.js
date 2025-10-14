@@ -60,7 +60,7 @@ const server = http.createServer((request, response) => {
             response.end(fs.readFileSync(js));
         }
         else if (request.method === 'HEAD') {
-            response.end():
+            response.end();
         }
     }
 
