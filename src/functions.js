@@ -149,6 +149,10 @@ const editReq = (response, request, countries, body) => {
         resJSON(response, 404, { error: 'Country not found.', id:'notFound' });
         return;
     }
+    if (!body.newCapital) {
+        resJSON(response, 404, { error: 'New Capital not found.', id: 'notFound' });
+        return;
+    }
     //updates country found capital with newCapital
     country.capital = String(body.newCapital);
     //responds with status
