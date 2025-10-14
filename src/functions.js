@@ -60,20 +60,39 @@ const getHeadReq = (response, request, parsedUrl, countries) => {
         if (capital) {retFilt = retFilt && c.capital && c.capital.toLowerCase().includes(capital.toLowerCase().trim());}
         return retFilt
     });
+    const err = JSON.stringify({ error: 'No matching countries found.', id: 'notFound' });
     if (request.method === 'GET') {
-        const body = JSON.stringify(resultsF);
-        response.writeHead(200, {
-            'Content-Type': 'application/json',
-            'Content-Length': Buffer.byteLength(body)
-        });
-        response.end(body);
+        if (resultsF.length === 0) {
+            response.writeHead(404, {
+                'Content-Type': 'application/json',
+                'Content-Length': Buffer.byteLength(errBody),
+            });
+            response.end(errBody);
+        }
+        else {
+            const body = JSON.stringify(resultsF);
+            response.writeHead(200, {
+                'Content-Type': 'application/json',
+                'Content-Length': Buffer.byteLength(body)
+            });
+            response.end(body);
+        }
     }
     else {
-        response.writeHead(204, {
-            'Content-Type': 'application/json',
-            'Content-Length': 0
-        });
-        response.end();
+        if (resultsF.length === 0) {
+            response.writeHead(404, {
+                'Content-Type': 'application/json',
+                'Content-Length': Buffer.byteLength(errBody),
+            });
+            response.end();
+        }
+        else {
+            response.writeHead(204, {
+                'Content-Type': 'application/json',
+                'Content-Length': 0
+            });
+            response.end();
+        }
     }
 }
 //function returns all countries in list
