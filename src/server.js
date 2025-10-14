@@ -43,13 +43,13 @@ const server = http.createServer((request, response) => {
         let results = countries.slice();
 
         if (pathName === '/api/getCountryName') {
-            func.getHeadReq(response, parsedUrl, countries);
+            func.getHeadReq(response, request, parsedUrl, countries);
         }
         else if (pathName === '/api/getCountryLocation') {
-            func.getHeadReq(response, parsedUrl, countries);
+            func.getHeadReq(response, request, parsedUrl, countries);
         }
         else if (pathName === '/api/getCountryFinance') {
-            func.getHeadReq(response, parsedUrl, countries);
+            func.getHeadReq(response, request, parsedUrl, countries);
         }
         else if (pathName === '/api/getAllCountries') {
             func.resJSON(response, 200, results);

@@ -18,7 +18,7 @@ const mainReq = (response, request, conType, fileType) => {
     }
 }
 
-const getHeadReq = (response, parsedUrl, countries) => {
+const getHeadReq = (response, request, parsedUrl, countries) => {
     const { name, region, capital } = parsedUrl.query;
     const resultsF = countries.filter((c) => {
         let retFilt = true;
@@ -32,6 +32,15 @@ const getHeadReq = (response, parsedUrl, countries) => {
             'Content-Type': 'application/json',
             'Content-Length': 0
         });
+        response.end();
+    }
+    else {
+        const body = JSON.stringify(resultsF);
+        response.writeHead(200, {
+            'Content-Type': 'application/json',
+            'Content-Length': Buffer.byteLength(body)
+        });
+        response.end();
     }
     resJSON(response, 200, resultsF);
 }
