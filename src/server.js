@@ -26,7 +26,7 @@ const mainReq = (response, request, conType, fileType) => {
     }
 }
 
-const getHeadReq = (response, request, q1, q2) => {
+const getHeadReq = (response, q1, q2, parsedURL) => {
     const { q1, q2 } = parsedUrl.query;
     const resultsF = countries.filter((c) => {
         let retFilt = true;
@@ -73,6 +73,8 @@ const server = http.createServer((request, response) => {
         let results = countries.slice();
 
         if (pathName === '/api/getCountryName') {
+            getHeadReq(response, region, capital, parsedUrl);
+            /*
             const { region, capital } = parsedUrl.query;
             const resultsF = countries.filter((c) => {
                 let retFilt = true;
@@ -84,7 +86,7 @@ const server = http.createServer((request, response) => {
                 }
                 return retFilt
             });
-            resJSON(response, 200, resultsF);
+            resJSON(response, 200, resultsF);*/
         }
         else if (pathName === '/api/getCountryLocation') {
             const { name, capital } = parsedUrl.query;
