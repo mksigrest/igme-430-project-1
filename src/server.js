@@ -26,7 +26,7 @@ const mainReq = (response, request, conType, fileType) => {
     }
 }
 
-const getHeadReq = (response, q1, q2, parsedURL) => {
+const getHeadReq = (response, q1, q2, parsedUrl) => {
     const { q1, q2 } = parsedUrl.query;
     const resultsF = countries.filter((c) => {
         let retFilt = true;
