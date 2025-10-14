@@ -15,6 +15,17 @@ const resJSON = (response, statusCode, object) => {
     response.end(JSON.stringify(object));
 }
 
+const mainReq = (conType, fileType) {
+    response.writeHead(200, { 'Content-Type': conType });
+
+    if (request.method === 'GET') {
+        response.end(fs.readFileSync(fileType));
+    }
+    else if (request.method === 'HEAD') {
+        response.end();
+    }
+}
+
 let countries = [];
 try {
     const rawJSON = fs.readFileSync(json, { encoding: 'utf8' });
@@ -32,6 +43,8 @@ const server = http.createServer((request, response) => {
     const pathName = parsedUrl.pathname;
 
     if ((request.method === 'GET' || request.method === 'HEAD') && (pathName === '/' || pathName === '/client.html')) {
+        mainReq('text/html', html);
+        /*
         response.writeHead(200, { 'Content-Type': 'text/html' });
 
         if (request.method === 'GET') {
@@ -39,7 +52,7 @@ const server = http.createServer((request, response) => {
         }
         else if (request.method === 'HEAD') {
             response.end();
-        }
+        }*/
     }
 
     else if ((request.method === 'GET' || request.method === 'HEAD') && (pathName === '/client.css')) {
