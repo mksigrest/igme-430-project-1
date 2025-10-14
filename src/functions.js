@@ -8,7 +8,7 @@ const resJSON = (response, statusCode, object) => {
     response.end(body);
 }
 
-const parseBody = (request, callBack) => {
+const parseBody = (response, request, countries, callBack) => {
     let rawBody = '';
     request.on('data', chunk => { rawBody += chunk; });
     request.on('end', () => {
@@ -25,6 +25,8 @@ const parseBody = (request, callBack) => {
         else {
             body = {};
         }
+
+        callBack(response, request, countries, body);
     })
 }
 
@@ -67,49 +69,36 @@ const getHeadReq = (response, request, parsedUrl, countries) => {
     resJSON(response, 200, resultsF);
 }
 
-const addReq = (response, request, countries) => {
-    let rawBody = '';
-    request.on('data', chunk => {rawBody += chunk;});
+const addReq = (response, request, countries, body) => {
+    const { name, capital } = body;
+    const nameE = countries.find((c) => c.name.toLowerCase() === String(name).toLowerCase());
+    const capitalE = countries.find((c) => c.capital.toLowerCase() === String(capital).toLowerCase());
 
-    request.on('end', () => {
-        const body = JSON.parse(rawBody);
-        
-        const { name, capital } = body;
-        const nameE = countries.find((c) => c.name.toLowerCase() === String(name).toLowerCase());
-        const capitalE = countries.find((c) => c.capital.toLowerCase() === String(capital).toLowerCase());
+    if (nameE || capitalE) {
+        resJSON(response, 400, 'Country/Capital already exists');
+        return;
+    }
 
-        if (nameE || capitalE) {
-            resJSON(response, 400, 'Country/Capital already exists');
-            return;
-        }
+    const newCountry = {
+        name: String(body.name),
+        capital: String(body.capital),
+        longitude: body.longitude,
+        latitude: body.latitude,
+    };
 
-        const newCountry = {
-            name: String(body.name),
-            capital: String(body.capital),
-            longitude: body.longitude,
-            latitude: body.latitude,
-        };
-
-        countries.push(newCountry);
-        resJSON(response, 201, newCountry);
-    });
+    countries.push(newCountry);
+    resJSON(response, 201, newCountry);
 }
 
-const editReq = (response, request, countries) => {
-    let rawBody = '';
-    request.on('data', chunk => {rawBody += chunk;})
+const editReq = (response, request, countries, body) => {
+    const { name, capital, newCapital } = body;
 
-    request.on('end', () => {
-        const body = JSON.parse(rawBody);
-        const { name, capital, newCapital } = body;
-
-        let country = countries.find((c) => c.name.toLowerCase() === name.toLowerCase());
-        if (!country) {country = countries.find((c) => c.capital.toLowerCase() === capital.toLowerCase());}
+    let country = countries.find((c) => c.name.toLowerCase() === name.toLowerCase());
+    if (!country) {country = countries.find((c) => c.capital.toLowerCase() === capital.toLowerCase());}
         
-        country.capital = String(body.newCapital);
+    country.capital = String(body.newCapital);
         
-        resJSON(response, 200, country);
-    })
+    resJSON(response, 200, country);
 }
 
-module.exports = { resJSON, mainReq, getHeadReq, addReq, editReq };
+module.exports = { resJSON, parseBody, mainReq, getHeadReq, addReq, editReq };

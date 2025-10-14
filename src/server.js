@@ -58,11 +58,15 @@ const server = http.createServer((request, response) => {
     
     else if (request.method === 'POST') {
         if (pathName === '/api/addCountry') {
-            func.addReq(response, request, countries);
+            func.parseBody(response, request, countries, (body) => {
+                func.addReq(response, request, countries, body);
+            })
         }
         
         else if (pathName === '/api/editCapital') {
-            func.editReq(response, request, countries);
+            func.parseBody(response, request, countries, (body) => {
+                func.editReq(response, request, countries, body);
+            })
         }
     }
     
